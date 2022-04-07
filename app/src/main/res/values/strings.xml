@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">NPCreator</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">Login</string>
+    <string name="signup">Sign Up</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="logout">Logout</string>
+
+    <string name="emailHint">Email</string>
+    <string name="passwordHint">Password</string>
+    <string name="nameHint">Name</string>
+
+    <string name="logoDesc">Logo Description Here</string>
 </resources>
