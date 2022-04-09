@@ -66,7 +66,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@mipmap/ic_launcher_round" />
+        tools:src="@mipmap/ic_npc_logo_color_foreground" />
 
     <Button
         android:id="@+id/signUpSubmitButton"
@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/cancel"
-        android:textColor="?android:attr/textColorPrimary"
+        android:textColor="?attr/colorPrimaryVariant"
         app:layout_constraintEnd_toEndOf="@+id/signUpSubmitButton"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="@+id/signUpSubmitButton"

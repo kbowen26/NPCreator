@@ -36,7 +36,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@mipmap/ic_launcher_round" />
+        tools:src="@mipmap/ic_npc_logo_color_foreground" />
 
     <EditText
         android:id="@+id/loginPasswordEdit"
@@ -73,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/signup"
-        android:textColor="?android:attr/textColorPrimary"
+        android:textColor="?attr/colorPrimaryVariant"
         app:layout_constraintEnd_toEndOf="@+id/loginButton"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="@+id/loginButton"
