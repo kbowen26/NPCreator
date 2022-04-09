@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "116073010271",
+    "project_id": "npcreator-47fc1",
+    "storage_bucket": "npcreator-47fc1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:116073010271:android:1e0d17254f20f839cff7ea",
+        "android_client_info": {
+          "package_name": "com.itis_4440.npcreator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "116073010271-lp1lgrdlnhopoh2295sf9mgarm89brmo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5vcEGJlzXy_qc6gIvOwV0Qzxl8BNToHY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "116073010271-lp1lgrdlnhopoh2295sf9mgarm89brmo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

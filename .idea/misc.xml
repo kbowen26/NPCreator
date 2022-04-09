@@ -5,8 +5,10 @@
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/feature_row_item.xml" value="0.31927083333333334" />
+        <entry key="app/src/main/res/layout/fragment_creator.xml" value="0.16145833333333334" />
         <entry key="app/src/main/res/layout/fragment_edit.xml" value="0.24051282051282052" />
         <entry key="app/src/main/res/layout/fragment_edit_npc.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_filter.xml" value="0.14739583333333334" />
         <entry key="app/src/main/res/layout/fragment_generate.xml" value="0.31927083333333334" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/fragment_npc.xml" value="0.31927083333333334" />
@@ -14,6 +16,8 @@
         <entry key="app/src/main/res/layout/fragment_public_npcs.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/npc_row_item.xml" value="0.31927083333333334" />
+        <entry key="app/src/main/res/menu/logged_in.xml" value="0.16145833333333334" />
+        <entry key="app/src/main/res/menu/logged_out.xml" value="0.31927083333333334" />
         <entry key="app/src/main/res/menu/npcreator_menu.xml" value="0.31927083333333334" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_npc_logo_white.xml" value="0.2615" />
       </map>
