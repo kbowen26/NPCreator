@@ -2,6 +2,7 @@
     <string name="app_name">NPCreator</string>
     <string name="login">Login</string>
     <string name="signup">Sign Up</string>
+    <string name="edit">Edit</string>
     <string name="submit">Submit</string>
     <string name="search">Search</string>
     <string name="reroll">Reroll</string>
@@ -13,6 +14,8 @@
     <string name="editProfile">Edit Profile</string>
     <string name="publicNpcs">NPCs</string>
     <string name="whoAreThey">Who Are They?</string>
+    <string name="stats">Stats</string>
+    <string name="desc">Description</string>
 
     <string name="name">Name</string>
     <string name="size">Size</string>
@@ -40,12 +43,20 @@
     <string name="legendaryAction">Legendary Action</string>
     <string name="lairAction">Lair Action</string>
     <string name="Abilities">Abilities</string>
+    <string name="createdBy">Created by</string>
+    <string name="personality">Personality</string>
+    <string name="goals">Goals</string>
+    <string name="backstory">Backstory</string>
 
     <string name="emailHint">Email</string>
     <string name="passwordHint">Password</string>
     <string name="nameHint">Name</string>
 
-    <string name="logoDesc">Logo Description Here</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="npcCreated">NPC created</string>
+    <string name="npcDeleted">NPC deleted</string>
+    <string name="npcUpdated">NPC updated</string>
+
+    <string name="logoDesc">The letters NPC in purple, orange, and cyan.
+        The P is made up of the last stroke of the N, and the C is tucked
+        under the bowl of the P.</string>
 </resources>

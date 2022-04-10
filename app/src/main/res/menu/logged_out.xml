@@ -6,9 +6,6 @@
         android:id="@+id/guestLoginItem"
         android:title="@string/login" />
     <item
-        android:id="@+id/guestNPCreatorItem"
-        android:title="@string/npcreator" />
-    <item
         android:id="@+id/guestPublicNPCsItem"
         android:title="@string/publicNpcs" />
 </menu>

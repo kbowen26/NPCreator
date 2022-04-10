@@ -8,12 +8,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity
-        implements CreatorFragment.CreatorListener {
+        implements CreatorFragment.CreatorListener
+        , NpcAdapter.NpcViewHolder.NpcListener {
     private static final String A = "Arrived at";
     private static final String E = "Error";
 
@@ -30,7 +33,7 @@ public class MainActivity extends AppCompatActivity
         db = FirebaseFirestore.getInstance();
 
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragmentContainerView, new CreatorFragment())
+                .add(R.id.fragmentContainerView, new PublicNpcsFragment())
                 .addToBackStack(null)
                 .commit();
     }
@@ -51,7 +54,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Log.d(A, "main onOptionsItemSelected: " + String.valueOf(item.getItemId()));
+        Log.d(A, "main onOptionsItemSelected: " + item.getItemId());
         switch (item.getItemId()) {
             case R.id.guestLoginItem:
                 login();
@@ -59,7 +62,6 @@ public class MainActivity extends AppCompatActivity
             case R.id.userProfileItem:
                 profile();
                 return true;
-            case R.id.guestNPCreatorItem:
             case R.id.userNPCreatorItem:
                 creator();
                 return true;
@@ -117,6 +119,35 @@ public class MainActivity extends AppCompatActivity
         Log.d(A, "main customize");
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragmentContainerView, new EditNpcFragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void delete(String npcId) {
+        Log.d(A, "mainActivity deleteNpc id: " + npcId);
+
+        db.collection("npcs").document(npcId)
+                .delete()
+                .addOnSuccessListener(aVoid -> {
+                    Log.d(A, "npcId: " + npcId + " successfully deleted!");
+                    Toast.makeText(getApplicationContext()
+                            , getResources().getString(R.string.npcDeleted)
+                            , Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Log.d(E, "Error deleting item: " + e.getMessage());
+                    Toast.makeText(getApplicationContext()
+                            , e.getMessage()
+                            , Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    @Override
+    public void select(String npcId) {
+        Log.d(A, "main selectNpc");
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragmentContainerView, new NpcFragment())
                 .addToBackStack(null)
                 .commit();
     }
