@@ -8,18 +8,21 @@ public class Npc implements Serializable, Comparable<Npc> {
     @DocumentId
     private String id;
     private String name, type, creator, creator_id;
+    private boolean publicNpc;
     private Description description;
 
     public Npc() {
         //empty constructor
     }
 
-    public Npc(String id, String name, String type, String creator, String creator_id) {
+    public Npc(String id, String name, String type, String creator
+            , String creator_id, boolean publicNpc) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.creator = creator;
         this.creator_id = creator_id;
+        this.publicNpc = publicNpc;
     }
 
     public String getId() {
@@ -70,6 +73,14 @@ public class Npc implements Serializable, Comparable<Npc> {
         this.description = description;
     }
 
+    public boolean isPublicNpc() {
+        return publicNpc;
+    }
+
+    public void setPublicNpc(boolean publicNpc) {
+        this.publicNpc = publicNpc;
+    }
+
     @Override
     public String toString() {
         return "Npc{" +
@@ -78,6 +89,7 @@ public class Npc implements Serializable, Comparable<Npc> {
                 ", type='" + type + '\'' +
                 ", creator='" + creator + '\'' +
                 ", creator_id='" + creator_id + '\'' +
+                ", publicNpc=" + publicNpc +
                 ", description=" + description +
                 '}';
     }

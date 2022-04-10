@@ -56,6 +56,11 @@
     <string name="npcDeleted">NPC deleted</string>
     <string name="npcUpdated">NPC updated</string>
 
+    <string name="errorEmail">Enter email</string>
+    <string name="errorName">Enter name</string>
+    <string name="errorPassword">Enter password</string>
+    <string name="errorPasswordShort">Password must be at least 6 characters long</string>
+
     <string name="logoDesc">The letters NPC in purple, orange, and cyan.
         The P is made up of the last stroke of the N, and the C is tucked
         under the bowl of the P.</string>

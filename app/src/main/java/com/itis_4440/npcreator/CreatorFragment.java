@@ -15,55 +15,47 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.Gson;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 public class CreatorFragment extends Fragment implements View.OnClickListener {
 
     private static final String A = "Arrived at";
     private static final String E = "Error";
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_INDEX = "index";
+
     private final OkHttpClient client = new OkHttpClient();
+    private CreatorFragment.CreatorListener creatorListener;
     private FirebaseFirestore db;
-
-    private String mParam1;
-    private String mParam2;
-
-    private TextView name, size, type, alignment, ac, hp, speed, str, dex,
-            con, intel, wis, cha, savingThrows, skills, senses, langs, creatorCR;
-    private CreatorListener creatorListener;
-    private AbilityAdapter abilityAdapter;
-    private ActionAdapter actionAdapter;
-    private ArrayList<Feature> abilities, actions;
-
-
 
     public CreatorFragment() {
         // Required empty public constructor
     }
 
-    public static CreatorFragment newInstance(String param1, String param2) {
-        CreatorFragment fragment = new CreatorFragment();
-        Bundle args = new Bundle();
-        //TODO TAKE IN FILTER SETTINGS
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -71,51 +63,32 @@ public class CreatorFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_creator, container, false);
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        //setup textview and buttons
-        initialize();
-
-        //abilities recycler and adapter
-        RecyclerView abilityRecyclerView = view.findViewById(R.id.abilitiesRecyclerView);
-        abilityRecyclerView.setHasFixedSize(true);
-        LinearLayoutManager abilityLayoutManager = new LinearLayoutManager(view.getContext());
-        abilityRecyclerView.setLayoutManager(abilityLayoutManager);
-        abilityAdapter = new AbilityAdapter(abilities);
-        abilityRecyclerView.setAdapter(abilityAdapter);
-
-        //actions recycler and adapter
-        RecyclerView actionRecyclerView = view.findViewById(R.id.actionsRecyclerView);
-        abilityRecyclerView.setHasFixedSize(true);
-        LinearLayoutManager actionLayoutManager = new LinearLayoutManager(view.getContext());
-        abilityRecyclerView.setLayoutManager(actionLayoutManager);
-        actionAdapter = new ActionAdapter(actions);
-        actionRecyclerView.setAdapter(actionAdapter);
-
         getData();
+
+        view.findViewById(R.id.rerollButton).setOnClickListener(this);
+        view.findViewById(R.id.filterButton).setOnClickListener(this);
+        view.findViewById(R.id.whoAreTheyButton).setOnClickListener(this);
+
+        getChildFragmentManager().beginTransaction()
+                .replace(R.id.creatorNpcFragmentContainerView, new NpcStatsFragment())
+                .addToBackStack(null)
+                .commit();
         return view;
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle(R.string.npcreator);
-
-    }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        creatorListener = (CreatorListener) context;
-    }
-
-    @Override
     public void onClick(View view) {
-        Log.d(A, "creator onClick");
+        Log.d(A, "npcStats onClick");
         switch (view.getId()) {
             case R.id.rerollButton:
-                getData();
+                String newStats = getData();
+                getChildFragmentManager().popBackStack();
+                getChildFragmentManager().beginTransaction()
+                        .replace(R.id.creatorNpcFragmentContainerView, NpcStatsFragment.newInstance(newStats))
+                        .addToBackStack(null)
+                        .commit();
                 break;
             case R.id.filterButton:
                 creatorListener.filter();
@@ -128,32 +101,17 @@ public class CreatorFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    public void initialize() {
-        name = getActivity().findViewById(R.id.creatorName);
-        size = getActivity().findViewById(R.id.creatorSize);
-        type = getActivity().findViewById(R.id.creatorType);
-        alignment = getActivity().findViewById(R.id.creatorAlignment);
-        ac = getActivity().findViewById(R.id.creatorACInfo);
-        hp = getActivity().findViewById(R.id.creatorHPInfo);
-        speed = getActivity().findViewById(R.id.creatorSpeedInfo);
-        str = getActivity().findViewById(R.id.creatorSTR2);
-        dex = getActivity().findViewById(R.id.creatorDEX2);
-        con = getActivity().findViewById(R.id.creatorCON2);
-        intel = getActivity().findViewById(R.id.creatorINT2);
-        wis = getActivity().findViewById(R.id.creatorWIS2);
-        savingThrows = getActivity().findViewById(R.id.creatorSavingInfo);
-        skills = getActivity().findViewById(R.id.creatorSkillsInfo);
-        senses = getActivity().findViewById(R.id.creatorSensesInfo);
-        langs = getActivity().findViewById(R.id.creatorLangsInfo);
-        creatorCR = getActivity().findViewById(R.id.creatorChallengeInfo);
-
-        getActivity().findViewById(R.id.rerollButton).setOnClickListener(this);
-        getActivity().findViewById(R.id.filterButton).setOnClickListener(this);
-        getActivity().findViewById(R.id.whoAreTheyButton).setOnClickListener(this);
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        creatorListener = (CreatorFragment.CreatorListener) context;
     }
 
-    private void getData() {
-        //TODO RETRIEVE DATA FROM 5E DND API
+    private String getData() {
+        Log.d(A, "creator getData");
+        //TODO IMPLEMENT RANDOMIZED DATA
+
+        return "ancient-gold-dragon";
     }
 
     interface CreatorListener {

@@ -13,12 +13,31 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.Map;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 public class MainActivity extends AppCompatActivity
         implements CreatorFragment.CreatorListener
-        , NpcAdapter.NpcViewHolder.NpcListener {
+        , NpcAdapter.NpcViewHolder.NpcListener
+        , LoginFragment.LoginFragmentListener {
     private static final String A = "Arrived at";
     private static final String E = "Error";
+
+    private final OkHttpClient client = new OkHttpClient();
 
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
@@ -33,9 +52,10 @@ public class MainActivity extends AppCompatActivity
         db = FirebaseFirestore.getInstance();
 
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragmentContainerView, new PublicNpcsFragment())
+                .replace(R.id.fragmentContainerView, new PublicNpcsFragment())
                 .addToBackStack(null)
                 .commit();
+
     }
 
     @Override
@@ -148,6 +168,24 @@ public class MainActivity extends AppCompatActivity
         Log.d(A, "main selectNpc");
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragmentContainerView, new NpcFragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void loggedIn() {
+        Log.d(A, "main loggedIn");
+        getSupportFragmentManager().popBackStack();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainerView, new PublicNpcsFragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void signUp() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainerView, new SignUpFragment())
                 .addToBackStack(null)
                 .commit();
     }

@@ -17,7 +17,8 @@ import java.util.ArrayList;
 
 public class NpcAdapter extends RecyclerView.Adapter<NpcAdapter.NpcViewHolder> {
     //fields
-    private static final String A = "Arrived at: ";
+    private static final String A = "Arrived at";
+    private static final String E = "Error";
     private static ArrayList<Npc> npcs;
     private static NpcViewHolder.NpcListener npcListener;
     private static Context npcContext;
@@ -55,10 +56,16 @@ public class NpcAdapter extends RecyclerView.Adapter<NpcAdapter.NpcViewHolder> {
         holder.type.setText(npc.getType());
         holder.creator.setText(npc.getCreator());
 
-        if (npc.getCreator_id().matches(holder.user_id)) {
-            holder.delete.setVisibility(View.VISIBLE);
-            holder.delete.setEnabled(true);
-        } else {
+        try {
+            if (npc.getCreator_id().matches(FirebaseAuth.getInstance().getUid())) {
+                holder.delete.setVisibility(View.VISIBLE);
+                holder.delete.setEnabled(true);
+            } else {
+                holder.delete.setVisibility(View.INVISIBLE);
+                holder.delete.setEnabled(false);
+            }
+        } catch (Exception e) {
+            Log.d(E, "no user ids to compare: " + e.getMessage());
             holder.delete.setVisibility(View.INVISIBLE);
             holder.delete.setEnabled(false);
         }
@@ -78,16 +85,13 @@ public class NpcAdapter extends RecyclerView.Adapter<NpcAdapter.NpcViewHolder> {
     public static class NpcViewHolder extends RecyclerView.ViewHolder {
         TextView name, type, creator;
         ImageView delete;
-        String user_id;
         int position;
         View rootView;
 
         public NpcViewHolder(@NonNull View itemView) {
             super(itemView);
             rootView = itemView;
-            user_id = FirebaseAuth.getInstance().getUid();
             npcListener = (NpcListener) itemView.getContext();
-
             name = itemView.findViewById(R.id.npcName);
             type = itemView.findViewById(R.id.npcType);
             creator = itemView.findViewById(R.id.npcCreator);

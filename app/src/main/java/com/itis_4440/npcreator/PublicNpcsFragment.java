@@ -1,64 +1,86 @@
 package com.itis_4440.npcreator;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PublicNpcsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+
 public class PublicNpcsFragment extends Fragment {
+    private static final String A = "Arrived at";
+    private static final String ARG_PUBLIC = "public";
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private FirebaseFirestore db;
+    private final ArrayList<Npc> npcs = new ArrayList<>();
+    private NpcAdapter adapter;
 
     public PublicNpcsFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PublicNpcsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PublicNpcsFragment newInstance(String param1, String param2) {
-        PublicNpcsFragment fragment = new PublicNpcsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_public_npcs, container, false);
+        View view = inflater.inflate(R.layout.fragment_public_npcs, container, false);
+        getActivity().setTitle(R.string.publicNpcs);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+        //TODO IMPLEMENT SEARCH FEATURE
+
+        RecyclerView recyclerView = view.findViewById(R.id.publicNpcRecyclerView);
+        recyclerView.setHasFixedSize(true);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
+        recyclerView.setLayoutManager(layoutManager);
+
+        adapter = new NpcAdapter(npcs, this.getActivity());
+        recyclerView.setAdapter(adapter);
+
+        getData();
+        return view;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+    }
+
+    private void getData() {
+        Log.d(A, "publicNpcsFragment getData");
+        db.collection("npcs")
+                .whereEqualTo(ARG_PUBLIC, true)
+                .addSnapshotListener((value, error) -> {
+                    npcs.clear();
+                    for (QueryDocumentSnapshot qds : value) {
+                        Log.d(A, qds.toString());
+                        Npc newNpc = qds.toObject(Npc.class);
+                        npcs.add(newNpc);
+                    }
+                    Collections.sort(npcs);
+                    adapter.update(npcs);
+                });
     }
 }
