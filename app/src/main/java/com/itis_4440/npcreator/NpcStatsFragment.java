@@ -138,22 +138,25 @@ public class NpcStatsFragment extends Fragment {
                 .url("https://www.dnd5eapi.co/api/monsters/" + index)
                 .build();
 
+        Log.d(A, "monsterURL: " + request.url());
+
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Log.d(A,"mainActivity get monster Callback onFailure");
+                Log.d(A,"npcStats get monster Callback onFailure");
                 e.printStackTrace();
             }
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                Log.d(A, "mainActivity getLatAndLon onResponse: " + Thread.currentThread().getId());
+                Log.d(A, "npcStats getMonster onResponse: " + Thread.currentThread().getId());
 
                 if (response.isSuccessful()) {
-                    Log.d(A, "mainActivity getLatAndLon onResponse isSuccessful");
+                    Log.d(A, "npcStats getMonster onResponse isSuccessful");
                     try {
                         JSONObject json = new JSONObject(response.body().string());
                         name.setText(json.getString("name"));
+                        Log.d(A, "monster name: " + json.getString("name"));
                         size.setText(json.getString("size"));
                         type.setText(json.getString("type") + ", ");
                         alignment.setText(json.getString("alignment"));
@@ -178,7 +181,7 @@ public class NpcStatsFragment extends Fragment {
                 } else {
                     ResponseBody responseBody = response.body();
                     String body = responseBody.string();
-                    Log.d(A, "getLandAndLon onResponse NotSuccessful: " + body);
+                    Log.d(A, "getMonster onResponse NotSuccessful: " + body);
                 }
             }
         });

@@ -52,6 +52,7 @@
     <string name="passwordHint">Password</string>
     <string name="nameHint">Name</string>
 
+    <string name="accountCreated">Account created</string>
     <string name="npcCreated">NPC created</string>
     <string name="npcDeleted">NPC deleted</string>
     <string name="npcUpdated">NPC updated</string>

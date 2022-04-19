@@ -8,34 +8,26 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.gson.Gson;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.util.Random;
 
-import java.io.IOException;
-import java.util.Map;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.ResponseBody;
 
 public class MainActivity extends AppCompatActivity
         implements CreatorFragment.CreatorListener
         , NpcAdapter.NpcViewHolder.NpcListener
-        , LoginFragment.LoginFragmentListener {
+        , LoginFragment.LoginFragmentListener
+        , SignUpFragment.SignUpFragmentListener {
     private static final String A = "Arrived at";
     private static final String E = "Error";
+    private Random random = new Random();
 
     private final OkHttpClient client = new OkHttpClient();
 
@@ -62,12 +54,21 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         Log.d(A, "main onCreateOptionsMenu");
         MenuInflater inflater = getMenuInflater();
-        if (mAuth.getCurrentUser() == null) {
-            Log.d(A, "main user logged out");
-            inflater.inflate(R.menu.logged_out, menu);
-        } else {
-            Log.d(A, "main user logged in");
-            inflater.inflate(R.menu.logged_in, menu);
+        inflater.inflate(R.menu.default_menu, menu);
+
+        try {
+            Log.d(A, "onCreateOptionsMenu check if logged in");
+            mAuth.getCurrentUser().getUid();
+            menu.setGroupEnabled(R.id.loggedInGroup, true);
+            menu.setGroupVisible(R.id.loggedInGroup, true);
+            menu.setGroupEnabled(R.id.loggedOutGroup, false);
+            menu.setGroupVisible(R.id.loggedOutGroup, false);
+        } catch (Exception e) {
+            Log.d(A, "check if user logged in: " + e.getMessage());
+            menu.setGroupEnabled(R.id.loggedInGroup, false);
+            menu.setGroupVisible(R.id.loggedInGroup, false);
+            menu.setGroupEnabled(R.id.loggedOutGroup, true);
+            menu.setGroupVisible(R.id.loggedOutGroup, true);
         }
         return true;
     }
@@ -76,17 +77,16 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Log.d(A, "main onOptionsItemSelected: " + item.getItemId());
         switch (item.getItemId()) {
-            case R.id.guestLoginItem:
+            case R.id.loginItem:
                 login();
                 return true;
-            case R.id.userProfileItem:
+            case R.id.profileItem:
                 profile();
                 return true;
-            case R.id.userNPCreatorItem:
+            case R.id.npcreatorItem:
                 creator();
                 return true;
-            case R.id.guestPublicNPCsItem:
-            case R.id.userNpcsItem:
+            case R.id.publicNPCsItem:
                 publicNpcs();
                 return true;
             default:
@@ -94,18 +94,35 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        try {
+            Log.d(A, "onCreateOptionsMenu check if logged in");
+            mAuth.getCurrentUser().getUid();
+            menu.setGroupEnabled(R.id.loggedInGroup, true);
+            menu.setGroupVisible(R.id.loggedInGroup, true);
+            menu.setGroupEnabled(R.id.loggedOutGroup, false);
+            menu.setGroupVisible(R.id.loggedOutGroup, false);
+        } catch (Exception e) {
+            Log.d(A, "check if user logged in: " + e.getMessage());
+            menu.setGroupEnabled(R.id.loggedInGroup, false);
+            menu.setGroupVisible(R.id.loggedInGroup, false);
+            menu.setGroupEnabled(R.id.loggedOutGroup, true);
+            menu.setGroupVisible(R.id.loggedOutGroup, true);
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
     private void creator() {
         Log.d(A, "main creator");
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragmentContainerView, new CreatorFragment())
-                .addToBackStack(null)
-                .commit();
+        reroll();
     }
 
     private void login() {
         Log.d(A, "main login");
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragmentContainerView, new LoginFragment())
+                .addToBackStack(null)
                 .commit();
     }
 
@@ -132,6 +149,42 @@ public class MainActivity extends AppCompatActivity
                 .add(R.id.fragmentContainerView, new FilterFragment())
                 .addToBackStack(null)
                 .commit();
+    }
+
+    @Override
+    public void reroll() {
+        Log.d(A, "main reroll");
+        //current monster database is fixed size - 332
+        int min = 1;
+        int max = 332;
+        int result = random.nextInt(max - min) + min;
+        DocumentReference docRef = db.collection("monsters").document(String.valueOf(result));
+        docRef.get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    Log.d(A, "monsterGet success");
+                    Monster monster = documentSnapshot.toObject(Monster.class);
+                    Log.d(A, "monsterGet index: " + monster.getIndex());
+                    runOnUiThread(() -> {
+                        getSupportFragmentManager().popBackStack();
+                        getSupportFragmentManager().beginTransaction()
+                                .add(R.id.fragmentContainerView
+                                        , CreatorFragment.newInstance(monster.getIndex()))
+                                .addToBackStack(null)
+                                .commit();
+                    });
+                })
+                .addOnFailureListener(error -> {
+                    Log.d(E, "monsterGet failed: " + error.getMessage());
+                    String errorDefault = "aboleth";
+                    runOnUiThread(() -> {
+                        getSupportFragmentManager().popBackStack();
+                        getSupportFragmentManager().beginTransaction()
+                                .add(R.id.fragmentContainerView
+                                        , CreatorFragment.newInstance(errorDefault))
+                                .addToBackStack(null)
+                                .commit();
+                    });
+                });
     }
 
     @Override
@@ -176,6 +229,7 @@ public class MainActivity extends AppCompatActivity
     public void loggedIn() {
         Log.d(A, "main loggedIn");
         getSupportFragmentManager().popBackStack();
+        this.invalidateOptionsMenu();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragmentContainerView, new PublicNpcsFragment())
                 .addToBackStack(null)
@@ -186,6 +240,16 @@ public class MainActivity extends AppCompatActivity
     public void signUp() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragmentContainerView, new SignUpFragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void accountCreated() {
+        Log.d(A, "main accountCreated");
+        getSupportFragmentManager().popBackStack();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainerView, new PublicNpcsFragment())
                 .addToBackStack(null)
                 .commit();
     }

@@ -1,7 +1,8 @@
 package com.itis_4440.npcreator;
 
 public class Monster {
-    String index, name, url;
+    private String index, name, url;
+    private int index_num;
 
     public Monster() {
     }
@@ -36,12 +37,21 @@ public class Monster {
         this.url = url;
     }
 
+    public int getIndex_num() {
+        return index_num;
+    }
+
+    public void setIndex_num(int index_num) {
+        this.index_num = index_num;
+    }
+
     @Override
     public String toString() {
         return "Monster{" +
                 "index='" + index + '\'' +
                 ", name='" + name + '\'' +
                 ", url='" + url + '\'' +
+                ", index_num=" + index_num +
                 '}';
     }
 }

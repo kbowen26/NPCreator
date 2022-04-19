@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 
@@ -30,6 +31,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -48,14 +50,26 @@ public class CreatorFragment extends Fragment implements View.OnClickListener {
     private final OkHttpClient client = new OkHttpClient();
     private CreatorFragment.CreatorListener creatorListener;
     private FirebaseFirestore db;
+    private String index;
 
     public CreatorFragment() {
         // Required empty public constructor
     }
 
+    public static CreatorFragment newInstance(String index) {
+        CreatorFragment fragment = new CreatorFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_INDEX, index);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            index = getArguments().getString(ARG_INDEX);
+        }
     }
 
     @Override
@@ -63,16 +77,17 @@ public class CreatorFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_creator, container, false);
+        getActivity().setTitle(R.string.npcreator);
         db = FirebaseFirestore.getInstance();
 
-        getData();
 
         view.findViewById(R.id.rerollButton).setOnClickListener(this);
         view.findViewById(R.id.filterButton).setOnClickListener(this);
         view.findViewById(R.id.whoAreTheyButton).setOnClickListener(this);
 
+        //TODO pop empty backstack, replace with newInstance
         getChildFragmentManager().beginTransaction()
-                .replace(R.id.creatorNpcFragmentContainerView, new NpcStatsFragment())
+                .replace(R.id.creatorNpcFragmentContainerView, NpcStatsFragment.newInstance(index))
                 .addToBackStack(null)
                 .commit();
         return view;
@@ -83,12 +98,7 @@ public class CreatorFragment extends Fragment implements View.OnClickListener {
         Log.d(A, "npcStats onClick");
         switch (view.getId()) {
             case R.id.rerollButton:
-                String newStats = getData();
-                getChildFragmentManager().popBackStack();
-                getChildFragmentManager().beginTransaction()
-                        .replace(R.id.creatorNpcFragmentContainerView, NpcStatsFragment.newInstance(newStats))
-                        .addToBackStack(null)
-                        .commit();
+                creatorListener.reroll();
                 break;
             case R.id.filterButton:
                 creatorListener.filter();
@@ -107,15 +117,9 @@ public class CreatorFragment extends Fragment implements View.OnClickListener {
         creatorListener = (CreatorFragment.CreatorListener) context;
     }
 
-    private String getData() {
-        Log.d(A, "creator getData");
-        //TODO IMPLEMENT RANDOMIZED DATA
-
-        return "ancient-gold-dragon";
-    }
-
     interface CreatorListener {
         void filter();
+        void reroll();
         void customize();
     }
 }
