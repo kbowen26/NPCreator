@@ -139,8 +139,8 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                             newUser.put(ARG_USER_ID, user.getUid());
 
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
-                            db.collection("users")
-                                    .add(newUser)
+                            db.collection("users").document(user.getUid())
+                                    .set(newUser)
                                     .addOnSuccessListener(documentReference -> {
                                         signUpFragmentListener.accountCreated();
                                     })
