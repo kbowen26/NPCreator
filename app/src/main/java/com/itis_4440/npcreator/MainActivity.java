@@ -24,7 +24,9 @@ public class MainActivity extends AppCompatActivity
         implements CreatorFragment.CreatorListener
         , NpcAdapter.NpcViewHolder.NpcListener
         , LoginFragment.LoginFragmentListener
-        , SignUpFragment.SignUpFragmentListener {
+        , SignUpFragment.SignUpFragmentListener
+        , ProfileFragment.ProfileListener
+        , EditFragment.EditListener {
     private static final String A = "Arrived at";
     private static final String E = "Error";
     private Random random = new Random();
@@ -230,14 +232,12 @@ public class MainActivity extends AppCompatActivity
         Log.d(A, "main loggedIn");
         getSupportFragmentManager().popBackStack();
         this.invalidateOptionsMenu();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainerView, new PublicNpcsFragment())
-                .addToBackStack(null)
-                .commit();
+        publicNpcs();
     }
 
     @Override
     public void signUp() {
+        getSupportFragmentManager().popBackStack();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragmentContainerView, new SignUpFragment())
                 .addToBackStack(null)
@@ -248,9 +248,30 @@ public class MainActivity extends AppCompatActivity
     public void accountCreated() {
         Log.d(A, "main accountCreated");
         getSupportFragmentManager().popBackStack();
+        publicNpcs();
+    }
+
+    @Override
+    public void editProfile() {
+        Log.d(A, "main editProfile");
+        getSupportFragmentManager().popBackStack();
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainerView, new PublicNpcsFragment())
+                .replace(R.id.fragmentContainerView, new EditFragment())
                 .addToBackStack(null)
                 .commit();
+    }
+
+    @Override
+    public void nameUpdated() {
+        Log.d(A, "main nameUpdated");
+        getSupportFragmentManager().popBackStack();
+        profile();
+    }
+
+    @Override
+    public void cancelUpdate() {
+        Log.d(A, "main cancelUpdate");
+        getSupportFragmentManager().popBackStack();
+        profile();
     }
 }

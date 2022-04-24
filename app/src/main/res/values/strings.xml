@@ -13,6 +13,7 @@
     <string name="profile">Profile</string>
     <string name="editProfile">Edit Profile</string>
     <string name="publicNpcs">NPCs</string>
+    <string name="profileNpcs">Your NPCs</string>
     <string name="whoAreThey">Who Are They?</string>
     <string name="stats">Stats</string>
     <string name="desc">Description</string>
@@ -53,6 +54,7 @@
     <string name="nameHint">Name</string>
 
     <string name="accountCreated">Account created</string>
+    <string name="nameUpdated">Name updated</string>
     <string name="npcCreated">NPC created</string>
     <string name="npcDeleted">NPC deleted</string>
     <string name="npcUpdated">NPC updated</string>
@@ -65,4 +67,5 @@
     <string name="logoDesc">The letters NPC in purple, orange, and cyan.
         The P is made up of the last stroke of the N, and the C is tucked
         under the bowl of the P.</string>
+    <string name="editButtonDesc">Pencil</string>
 </resources>

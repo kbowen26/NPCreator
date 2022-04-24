@@ -98,8 +98,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     private void loginAccount() {
         // Initialize Firebase Auth
-
-        //TODO IMPLEMENT GOOGLE LOGIN: https://firebase.google.com/docs/auth/android/google-signin
         mAuth = FirebaseAuth.getInstance();
         String emailString = email.getText().toString();
         String passwordString = password.getText().toString();

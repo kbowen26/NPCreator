@@ -10,22 +10,21 @@ import android.view.ViewGroup;
 
 
 public class NpcDetailsFragment extends Fragment {
+    //TODO FILL OUT DETAILS FRAG
+    private static final String A = "Arrived at";
+    private static final String E = "Error";
+    private static final String ARG_INDEX = "index";
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
+    private String index;
 
     public NpcDetailsFragment() {
         // Required empty public constructor
     }
 
-    public static NpcDetailsFragment newInstance(String param1, String param2) {
+    public static NpcDetailsFragment newInstance(String index) {
         NpcDetailsFragment fragment = new NpcDetailsFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_INDEX, index);
         fragment.setArguments(args);
         return fragment;
     }
@@ -34,8 +33,7 @@ public class NpcDetailsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            this.index = getArguments().getString(ARG_INDEX);
         }
     }
 

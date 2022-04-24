@@ -8,30 +8,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link NpcFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.google.android.material.tabs.TabLayout;
+
 public class NpcFragment extends Fragment {
 
     // TODO: FILL OUT NPC FRAGMENT
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String A = "Arrived at";
+    private static final String E = "Error";
+    private static final String ARG_INDEX = "index";
 
-    private String mParam1;
-    private String mParam2;
+    private String index;
+    TabLayout npcTabs;
 
     public NpcFragment() {
         // Required empty public constructor
     }
 
-    public static NpcFragment newInstance(String param1, String param2) {
+    public static NpcFragment newInstance(String index) {
         NpcFragment fragment = new NpcFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_INDEX, index);
         fragment.setArguments(args);
         return fragment;
     }
@@ -40,8 +36,7 @@ public class NpcFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            this.index = getArguments().getString(ARG_INDEX);
         }
     }
 
@@ -49,6 +44,35 @@ public class NpcFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_npc, container, false);
+        View view = inflater.inflate(R.layout.fragment_npc, container, false);
+        npcTabs = view.findViewById(R.id.npcTabLayout);
+
+        npcTabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.getId() == npcTabs.getTabAt(0).getId()) {
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.npcFragmentContainerView, NpcStatsFragment.newInstance(index))
+                            .commit();
+                } else {
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.npcFragmentContainerView, NpcDetailsFragment.newInstance(index))
+                            .commit();
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+
+        return view;
     }
 }

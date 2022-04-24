@@ -32,11 +32,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link NpcStatsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class NpcStatsFragment extends Fragment {
 
     private static final String A = "Arrived at";
@@ -45,6 +41,7 @@ public class NpcStatsFragment extends Fragment {
     private final OkHttpClient client = new OkHttpClient();
     private FirebaseFirestore db;
     private String index;
+    private String[] speedTypes = {"fly", "swim", "climb", "burrow"};
 
     private TextView name, size, type, alignment, ac, hp, speed, str, dex,
             con, intel, wis, cha, savingThrows, skills, senses, langs, creatorCR;
@@ -109,6 +106,7 @@ public class NpcStatsFragment extends Fragment {
     }
 
     public void initialize() {
+        Log.d(A, "npcStats initialize method");
         name = getActivity().findViewById(R.id.detailsName);
         size = getActivity().findViewById(R.id.detailsSize);
         type = getActivity().findViewById(R.id.detailsType);
@@ -153,31 +151,54 @@ public class NpcStatsFragment extends Fragment {
 
                 if (response.isSuccessful()) {
                     Log.d(A, "npcStats getMonster onResponse isSuccessful");
+                    JSONObject json = null;
+
+                    //TODO: FIX OVERLAP OF FRAGMENTS
+                    //TODO: FIX CALLS TO SETTEXT
                     try {
-                        JSONObject json = new JSONObject(response.body().string());
-                        name.setText(json.getString("name"));
-                        Log.d(A, "monster name: " + json.getString("name"));
-                        size.setText(json.getString("size"));
-                        type.setText(json.getString("type") + ", ");
-                        alignment.setText(json.getString("alignment"));
-                        ac.setText(json.getString("armor_class"));
-                        hp.setText(json.getString("hit_points") + "(" + json.getString("hit_dice") + ")");
-                        JSONArray speedArray = new JSONArray(json.getJSONArray("speed"));
-                        String speedString = speedArray.getJSONObject(0).toString();
-
-                        speed.setText(json.getString(speedString));
-                        str.setText(String.valueOf(json.getInt("strength")));
-                        dex.setText(String.valueOf(json.getInt("dexterity")));
-                        con.setText(String.valueOf(json.getInt("constitution")));
-                        intel.setText(String.valueOf(json.getInt("intelligence")));
-                        wis.setText(String.valueOf(json.getInt("wisdom")));
-                        cha.setText(String.valueOf(json.getInt("charisma")));
-
-                        //TODO FINISH DISPLAY STAT SETUP
+                        json = new JSONObject(response.body().string());
                     } catch (JSONException e) {
-                        Log.d(A, "try failed");
                         e.printStackTrace();
                     }
+                    JSONObject finalJson = json;
+                    getActivity().runOnUiThread(() -> {
+                            try {
+                                name.setText(finalJson.getString("name"));
+                                Log.d(A, "monster name: " + finalJson.getString("name"));
+                                size.setText(finalJson.getString("size"));
+                                type.setText(finalJson.getString("type") + ", ");
+                                alignment.setText(finalJson.getString("alignment"));
+                                ac.setText(finalJson.getString("armor_class"));
+                                hp.setText(finalJson.getString("hit_points") + "(" + finalJson.getString("hit_dice") + ")");
+                                JSONObject speedObject = finalJson.getJSONObject("speed");
+                                String speedString = "";
+                                speedString += speedObject.getString("walk");
+                                for (int i = 0; i < speedTypes.length; i++) {
+                                    String getSpeed = speedObject.getString(speedTypes[i]);
+                                    if (!getSpeed.isEmpty()) {
+                                        if (speedTypes[i].matches("fly") && speedObject.getBoolean("hover")) {
+                                            speedString += ", " + speedTypes[i] + " " + getSpeed + " (hover)";
+                                        } else {
+                                            speedString += ", " + speedTypes[i] + " " + getSpeed;
+                                        }
+                                    }
+                                }
+
+
+                                speed.setText(finalJson.getString(speedString));
+                                str.setText(String.valueOf(finalJson.getInt("strength")));
+                                dex.setText(String.valueOf(finalJson.getInt("dexterity")));
+                                con.setText(String.valueOf(finalJson.getInt("constitution")));
+                                intel.setText(String.valueOf(finalJson.getInt("intelligence")));
+                                wis.setText(String.valueOf(finalJson.getInt("wisdom")));
+                                cha.setText(String.valueOf(finalJson.getInt("charisma")));
+
+                                //TODO FINISH DISPLAY STAT SETUP
+                            } catch (JSONException e) {
+                                Log.d(A, "try failed");
+                                e.printStackTrace();
+                            }
+                        });
                 } else {
                     ResponseBody responseBody = response.body();
                     String body = responseBody.string();

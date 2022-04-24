@@ -1,21 +1,27 @@
 package com.itis_4440.npcreator;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Description implements Serializable, Comparable<Description> {
-    String name, personality, backstory, goal, monsterName;
+    String name, circumstances, childhood, deity, occupation, monsterName;
+    ArrayList<String> flaws, strengths;
 
     public Description() {
         //empty constructor
     }
 
-    public Description(String name, String personality, String backstory
-            , String goal, String monsterName) {
+    public Description(String name, String circumstances, String childhood
+            , String deity, String occupation, String monsterName, ArrayList<String> flaws
+            , ArrayList<String> strengths) {
         this.name = name;
-        this.personality = personality;
-        this.backstory = backstory;
-        this.goal = goal;
+        this.circumstances = circumstances;
+        this.childhood = childhood;
+        this.deity = deity;
+        this.occupation = occupation;
         this.monsterName = monsterName;
+        this.flaws = flaws;
+        this.strengths = strengths;
     }
 
     public String getName() {
@@ -26,28 +32,36 @@ public class Description implements Serializable, Comparable<Description> {
         this.name = name;
     }
 
-    public String getPersonality() {
-        return personality;
+    public String getCircumstances() {
+        return circumstances;
     }
 
-    public void setPersonality(String personality) {
-        this.personality = personality;
+    public void setCircumstances(String circumstances) {
+        this.circumstances = circumstances;
     }
 
-    public String getBackstory() {
-        return backstory;
+    public String getChildhood() {
+        return childhood;
     }
 
-    public void setBackstory(String backstory) {
-        this.backstory = backstory;
+    public void setChildhood(String childhood) {
+        this.childhood = childhood;
     }
 
-    public String getGoal() {
-        return goal;
+    public String getDeity() {
+        return deity;
     }
 
-    public void setGoal(String goal) {
-        this.goal = goal;
+    public void setDeity(String deity) {
+        this.deity = deity;
+    }
+
+    public String getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
     }
 
     public String getMonsterName() {
@@ -58,14 +72,33 @@ public class Description implements Serializable, Comparable<Description> {
         this.monsterName = monsterName;
     }
 
+    public ArrayList<String> getFlaws() {
+        return flaws;
+    }
+
+    public void setFlaws(ArrayList<String> flaws) {
+        this.flaws = flaws;
+    }
+
+    public ArrayList<String> getStrengths() {
+        return strengths;
+    }
+
+    public void setStrengths(ArrayList<String> strengths) {
+        this.strengths = strengths;
+    }
+
     @Override
     public String toString() {
         return "Description{" +
                 "name='" + name + '\'' +
-                ", personality='" + personality + '\'' +
-                ", backstory='" + backstory + '\'' +
-                ", goal='" + goal + '\'' +
+                ", circumstances='" + circumstances + '\'' +
+                ", childhood='" + childhood + '\'' +
+                ", deity='" + deity + '\'' +
+                ", occupation='" + occupation + '\'' +
                 ", monsterName='" + monsterName + '\'' +
+                ", flaws=" + flaws +
+                ", strengths=" + strengths +
                 '}';
     }
 

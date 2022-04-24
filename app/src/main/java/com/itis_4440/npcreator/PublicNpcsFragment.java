@@ -48,8 +48,6 @@ public class PublicNpcsFragment extends Fragment {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        //TODO IMPLEMENT SEARCH FEATURE
-
         RecyclerView recyclerView = view.findViewById(R.id.publicNpcRecyclerView);
         recyclerView.setHasFixedSize(true);
 
