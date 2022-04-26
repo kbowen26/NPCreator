@@ -85,11 +85,10 @@ public class CreatorFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.filterButton).setOnClickListener(this);
         view.findViewById(R.id.whoAreTheyButton).setOnClickListener(this);
 
-        //TODO pop empty backstack, replace with newInstance
         getChildFragmentManager().beginTransaction()
                 .replace(R.id.creatorNpcFragmentContainerView, NpcStatsFragment.newInstance(index))
-                .addToBackStack(null)
                 .commit();
+
         return view;
     }
 

@@ -381,11 +381,12 @@
 
     <TextView
         android:id="@+id/detailsSavingInfo"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:text="@string/savingThrows"
         android:textColor="?attr/colorPrimaryVariant"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/detailsSaving"
         app:layout_constraintTop_toTopOf="@+id/detailsSaving"
         tools:layout_conversion_absoluteHeight="216dp"
@@ -400,18 +401,18 @@
         android:textColor="?attr/colorPrimaryVariant"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/detailsSaving"
-        app:layout_constraintTop_toBottomOf="@+id/detailsSaving"
+        app:layout_constraintTop_toBottomOf="@+id/detailsSavingInfo"
         tools:layout_conversion_absoluteHeight="101dp"
         tools:layout_conversion_absoluteWidth="0dp" />
 
     <TextView
         android:id="@+id/detailsSkillsInfo"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:text="@string/skills"
         android:textColor="?attr/colorPrimaryVariant"
-        app:layout_constraintBottom_toBottomOf="@+id/detailsSkills"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/detailsSkills"
         app:layout_constraintTop_toTopOf="@+id/detailsSkills"
         tools:layout_conversion_absoluteHeight="101dp"
@@ -419,12 +420,12 @@
 
     <TextView
         android:id="@+id/detailsSensesInfo"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:text="@string/senses"
         android:textColor="?attr/colorPrimaryVariant"
-        app:layout_constraintBottom_toBottomOf="@+id/detailsSenses"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/detailsSenses"
         app:layout_constraintTop_toTopOf="@+id/detailsSenses"
         tools:layout_conversion_absoluteHeight="101dp"
@@ -432,12 +433,12 @@
 
     <TextView
         android:id="@+id/detailsLangsInfo"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:text="@string/langs"
         android:textColor="?attr/colorPrimaryVariant"
-        app:layout_constraintBottom_toBottomOf="@+id/detailsLangs"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/detailsLangs"
         app:layout_constraintTop_toTopOf="@+id/detailsLangs"
         tools:layout_conversion_absoluteHeight="150dp"
@@ -452,7 +453,7 @@
         android:textColor="?attr/colorPrimaryVariant"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/detailsSkills"
-        app:layout_constraintTop_toBottomOf="@+id/detailsSkills"
+        app:layout_constraintTop_toBottomOf="@+id/detailsSkillsInfo"
         tools:layout_conversion_absoluteHeight="101dp"
         tools:layout_conversion_absoluteWidth="0dp" />
 
@@ -460,23 +461,23 @@
         android:id="@+id/detailsChallenge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:text="@string/cr"
         android:textColor="?attr/colorPrimaryVariant"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/detailsLangs"
-        app:layout_constraintTop_toBottomOf="@+id/detailsLangs"
+        app:layout_constraintTop_toBottomOf="@+id/detailsLangsInfo"
         tools:layout_conversion_absoluteHeight="265dp"
         tools:layout_conversion_absoluteWidth="0dp" />
 
     <TextView
         android:id="@+id/detailsChallengeInfo"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:text="@string/cr"
         android:textColor="?attr/colorPrimaryVariant"
-        app:layout_constraintBottom_toBottomOf="@+id/detailsChallenge"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/detailsChallenge"
         app:layout_constraintTop_toTopOf="@+id/detailsChallenge"
         tools:layout_conversion_absoluteHeight="265dp"
@@ -491,7 +492,7 @@
         android:textColor="?attr/colorPrimaryVariant"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/detailsSenses"
-        app:layout_constraintTop_toBottomOf="@+id/detailsSenses"
+        app:layout_constraintTop_toBottomOf="@+id/detailsSensesInfo"
         tools:layout_conversion_absoluteHeight="150dp"
         tools:layout_conversion_absoluteWidth="0dp" />
 
@@ -504,7 +505,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailsChallenge"
+        app:layout_constraintTop_toBottomOf="@+id/detailsChallengeInfo"
         tools:layout_conversion_absoluteHeight="1dp"
         tools:layout_conversion_absoluteWidth="0dp" />
 

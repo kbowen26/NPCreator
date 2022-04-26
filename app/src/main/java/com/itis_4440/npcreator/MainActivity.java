@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity
     private void login() {
         Log.d(A, "main login");
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragmentContainerView, new LoginFragment())
+                .replace(R.id.fragmentContainerView, new LoginFragment())
                 .addToBackStack(null)
                 .commit();
     }
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity
     private void profile() {
         Log.d(A, "main profile");
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragmentContainerView, new ProfileFragment())
+                .replace(R.id.fragmentContainerView, new ProfileFragment())
                 .addToBackStack(null)
                 .commit();
     }
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity
     private void publicNpcs() {
         Log.d(A, "main publicNPCs");
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragmentContainerView, new PublicNpcsFragment())
+                .replace(R.id.fragmentContainerView, new PublicNpcsFragment())
                 .addToBackStack(null)
                 .commit();
     }
@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity
                     runOnUiThread(() -> {
                         getSupportFragmentManager().popBackStack();
                         getSupportFragmentManager().beginTransaction()
-                                .add(R.id.fragmentContainerView
+                                .replace(R.id.fragmentContainerView
                                         , CreatorFragment.newInstance(monster.getIndex()))
                                 .addToBackStack(null)
                                 .commit();
@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity
     public void customize() {
         Log.d(A, "main customize");
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragmentContainerView, new EditNpcFragment())
+                .replace(R.id.fragmentContainerView, new EditNpcFragment())
                 .addToBackStack(null)
                 .commit();
     }
@@ -222,7 +222,7 @@ public class MainActivity extends AppCompatActivity
     public void select(String npcId) {
         Log.d(A, "main selectNpc");
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragmentContainerView, new NpcFragment())
+                .replace(R.id.fragmentContainerView, new NpcFragment())
                 .addToBackStack(null)
                 .commit();
     }

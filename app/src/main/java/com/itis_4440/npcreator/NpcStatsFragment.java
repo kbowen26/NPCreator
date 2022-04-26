@@ -41,7 +41,10 @@ public class NpcStatsFragment extends Fragment {
     private final OkHttpClient client = new OkHttpClient();
     private FirebaseFirestore db;
     private String index;
-    private String[] speedTypes = {"fly", "swim", "climb", "burrow"};
+    private String[] speedTypes = {"walk", "fly", "swim", "climb", "burrow"};
+    private String[] skillTypes = {""};
+    private String[] senseTypes = {"blindsight", "darkvision", "tremorsense"
+            , "truesight", "passive_perception"};
 
     private TextView name, size, type, alignment, ac, hp, speed, str, dex,
             con, intel, wis, cha, savingThrows, skills, senses, langs, creatorCR;
@@ -78,7 +81,7 @@ public class NpcStatsFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
 
         //setup textview and buttons
-        initialize();
+        initialize(view);
 
         //abilities recycler and adapter
         RecyclerView abilityRecyclerView = view.findViewById(R.id.detailsAbilitiesRecyclerView);
@@ -105,31 +108,32 @@ public class NpcStatsFragment extends Fragment {
 
     }
 
-    public void initialize() {
+    public void initialize(View view) {
         Log.d(A, "npcStats initialize method");
-        name = getActivity().findViewById(R.id.detailsName);
-        size = getActivity().findViewById(R.id.detailsSize);
-        type = getActivity().findViewById(R.id.detailsType);
-        alignment = getActivity().findViewById(R.id.detailsAlignment);
-        ac = getActivity().findViewById(R.id.detailsACInfo);
-        hp = getActivity().findViewById(R.id.detailsHPInfo);
-        speed = getActivity().findViewById(R.id.detailsSpeedInfo);
-        str = getActivity().findViewById(R.id.detailsSTR2);
-        dex = getActivity().findViewById(R.id.detailsDEX2);
-        con = getActivity().findViewById(R.id.detailsCON2);
-        intel = getActivity().findViewById(R.id.detailsINT2);
-        wis = getActivity().findViewById(R.id.detailsWIS2);
-        savingThrows = getActivity().findViewById(R.id.detailsSavingInfo);
-        skills = getActivity().findViewById(R.id.detailsSkillsInfo);
-        senses = getActivity().findViewById(R.id.detailsSensesInfo);
-        langs = getActivity().findViewById(R.id.detailsLangsInfo);
-        creatorCR = getActivity().findViewById(R.id.detailsChallengeInfo);
+        name = view.findViewById(R.id.detailsName);
+        size = view.findViewById(R.id.detailsSize);
+        type = view.findViewById(R.id.detailsType);
+        alignment = view.findViewById(R.id.detailsAlignment);
+        ac = view.findViewById(R.id.detailsACInfo);
+        hp = view.findViewById(R.id.detailsHPInfo);
+        speed = view.findViewById(R.id.detailsSpeedInfo);
+        str = view.findViewById(R.id.detailsSTR2);
+        dex = view.findViewById(R.id.detailsDEX2);
+        con = view.findViewById(R.id.detailsCON2);
+        intel = view.findViewById(R.id.detailsINT2);
+        wis = view.findViewById(R.id.detailsWIS2);
+        cha = view.findViewById(R.id.detailsCHA2);
+        savingThrows = view.findViewById(R.id.detailsSavingInfo);
+        skills = view.findViewById(R.id.detailsSkillsInfo);
+        senses = view.findViewById(R.id.detailsSensesInfo);
+        langs = view.findViewById(R.id.detailsLangsInfo);
+        creatorCR = view.findViewById(R.id.detailsChallengeInfo);
 
         getData();
     }
 
     private void getData() {
-        Log.d(A, "npcStats getData");
+        Log.d(A, "npcStats getData with index " + index);
 
 
         Request request = new Request.Builder()
@@ -141,7 +145,7 @@ public class NpcStatsFragment extends Fragment {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Log.d(A,"npcStats get monster Callback onFailure");
+                Log.d(A, "npcStats get monster Callback onFailure");
                 e.printStackTrace();
             }
 
@@ -162,43 +166,91 @@ public class NpcStatsFragment extends Fragment {
                     }
                     JSONObject finalJson = json;
                     getActivity().runOnUiThread(() -> {
-                            try {
-                                name.setText(finalJson.getString("name"));
-                                Log.d(A, "monster name: " + finalJson.getString("name"));
-                                size.setText(finalJson.getString("size"));
-                                type.setText(finalJson.getString("type") + ", ");
-                                alignment.setText(finalJson.getString("alignment"));
-                                ac.setText(finalJson.getString("armor_class"));
-                                hp.setText(finalJson.getString("hit_points") + "(" + finalJson.getString("hit_dice") + ")");
-                                JSONObject speedObject = finalJson.getJSONObject("speed");
-                                String speedString = "";
-                                speedString += speedObject.getString("walk");
-                                for (int i = 0; i < speedTypes.length; i++) {
+                        try {
+                            name.setText(finalJson.getString("name"));
+                            size.setText(finalJson.getString("size"));
+                            type.setText(finalJson.getString("type") + ", ");
+                            alignment.setText(finalJson.getString("alignment"));
+                            ac.setText(finalJson.getString("armor_class"));
+                            hp.setText(finalJson.getString("hit_points") + " (" + finalJson.getString("hit_dice") + ")");
+
+                            //set speeds
+                            JSONObject speedObject = finalJson.getJSONObject("speed");
+                            String speedString = "";
+                            for (int i = 0; i < speedTypes.length; i++) {
+                                Log.d(A, "speedTypes length: " + speedTypes.length);
+                                try {
                                     String getSpeed = speedObject.getString(speedTypes[i]);
                                     if (!getSpeed.isEmpty()) {
                                         if (speedTypes[i].matches("fly") && speedObject.getBoolean("hover")) {
-                                            speedString += ", " + speedTypes[i] + " " + getSpeed + " (hover)";
+                                            if (speedString.matches("")) {
+                                                speedString += speedTypes[i] + " " + getSpeed + " (hover)";
+                                            } else {
+                                                speedString += ", " + speedTypes[i] + " " + getSpeed + " (hover)";
+                                            }
                                         } else {
-                                            speedString += ", " + speedTypes[i] + " " + getSpeed;
+                                            if (i == 0) {
+                                                speedString += " " + getSpeed;
+                                            } else {
+                                                speedString += ", " + speedTypes[i] + " " + getSpeed;
+                                            }
                                         }
                                     }
+                                } catch (Exception e) {
+                                    Log.d(E, e.getMessage());
                                 }
-
-
-                                speed.setText(finalJson.getString(speedString));
-                                str.setText(String.valueOf(finalJson.getInt("strength")));
-                                dex.setText(String.valueOf(finalJson.getInt("dexterity")));
-                                con.setText(String.valueOf(finalJson.getInt("constitution")));
-                                intel.setText(String.valueOf(finalJson.getInt("intelligence")));
-                                wis.setText(String.valueOf(finalJson.getInt("wisdom")));
-                                cha.setText(String.valueOf(finalJson.getInt("charisma")));
-
-                                //TODO FINISH DISPLAY STAT SETUP
-                            } catch (JSONException e) {
-                                Log.d(A, "try failed");
-                                e.printStackTrace();
                             }
-                        });
+                            speed.setText(speedString);
+
+                            //set ability scores
+                            str.setText(String.valueOf(finalJson.getInt("strength")));
+                            dex.setText(String.valueOf(finalJson.getInt("dexterity")));
+                            con.setText(String.valueOf(finalJson.getInt("constitution")));
+                            intel.setText(String.valueOf(finalJson.getInt("intelligence")));
+                            wis.setText(String.valueOf(finalJson.getInt("wisdom")));
+                            cha.setText(String.valueOf(finalJson.getInt("charisma")));
+
+                            //TODO set proficiencies - saving throws
+                            //TODO set proficiencies - skills
+
+                            //set senses
+                            JSONObject senseObject = finalJson.getJSONObject("senses");
+                            String senseString = "";
+                            for (int i = 0; i < senseTypes.length; i++) {
+                                Log.d(A, "senseTypes length: " + senseTypes.length);
+                                try {
+                                    String getSense = String.valueOf(senseObject.get(senseTypes[i]));
+                                    if (!getSense.isEmpty()) {
+                                        if (senseString.matches("")) {
+                                            senseString += senseTypes[i] + " +" + getSense;
+                                        } else {
+                                            senseString += ", " + senseTypes[i] + " " + getSense;
+                                        }
+                                    }
+                                } catch (Exception e) {
+                                    Log.d(E, e.getMessage());
+                                }
+                            }
+                            senses.setText(senseString);
+
+                            // set languages
+                            langs.setText(finalJson.getString("languages"));
+
+                            //set Challenge Rating
+                            double crDouble = Double.valueOf(String.valueOf(finalJson.get("challenge_rating")));
+                            int finalCr = (int) crDouble;
+                            String crString = String.valueOf(finalCr);
+                            if (1 > crDouble) {
+                                int denom = (int) (1 / crDouble);
+                                crString = "1/" + denom;
+                            }
+                            creatorCR.setText(crString);
+
+                        } catch (JSONException e) {
+                            Log.d(A, "try failed");
+                            e.printStackTrace();
+                        }
+                    });
                 } else {
                     ResponseBody responseBody = response.body();
                     String body = responseBody.string();
