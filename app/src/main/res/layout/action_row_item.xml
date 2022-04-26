@@ -2,38 +2,38 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/featureLinearLayout"
+    android:id="@+id/actionLinearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="5dp">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/featureCardView"
+        android:id="@+id/actionCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="?android:attr/colorBackground">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/featureRowConstraintLayout"
+            android:id="@+id/actionRowConstraintLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="5dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/featureRowItemConstraintLayout"
+                android:id="@+id/actionRowItemConstraintLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/featureRowConstraintLayout"
+                app:layout_constraintBottom_toBottomOf="@+id/actionRowConstraintLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/featureRowConstraintLayout"
+                app:layout_constraintTop_toTopOf="@+id/actionRowConstraintLayout"
                 app:layout_constraintVertical_bias="0.384">
 
                 <TextView
-                    android:id="@+id/featureTitle"
+                    android:id="@+id/actionTitle"
                     android:layout_width="0dp"
                     android:layout_height="20dp"
                     android:text="@string/actionsHeader"
@@ -45,7 +45,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/featureBody"
+                    android:id="@+id/actionBody"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/action"
@@ -54,7 +54,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/featureTitle" />
+                    app:layout_constraintTop_toBottomOf="@+id/actionTitle" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

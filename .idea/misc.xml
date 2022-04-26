@@ -3,15 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/layout/ability_row_item.xml" value="0.3026041666666667" />
+        <entry key="app/src/main/res/layout/action_row_item.xml" value="0.3026041666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/feature_row_item.xml" value="0.31927083333333334" />
-        <entry key="app/src/main/res/layout/fragment_creator.xml" value="0.16145833333333334" />
+        <entry key="app/src/main/res/layout/fragment_creator.xml" value="0.290625" />
         <entry key="app/src/main/res/layout/fragment_edit.xml" value="0.24051282051282052" />
         <entry key="app/src/main/res/layout/fragment_edit_npc.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_filter.xml" value="0.14739583333333334" />
         <entry key="app/src/main/res/layout/fragment_generate.xml" value="0.31927083333333334" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/fragment_new_desc.xml" value="0.3026041666666667" />
         <entry key="app/src/main/res/layout/fragment_npc.xml" value="0.31927083333333334" />
+        <entry key="app/src/main/res/layout/fragment_npc_desc.xml" value="0.3026041666666667" />
         <entry key="app/src/main/res/layout/fragment_npc_details.xml" value="0.30520833333333336" />
         <entry key="app/src/main/res/layout/fragment_npc_stats.xml" value="0.31927083333333334" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.23020833333333332" />

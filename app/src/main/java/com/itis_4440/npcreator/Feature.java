@@ -5,55 +5,45 @@ import com.google.firebase.firestore.DocumentId;
 import java.io.Serializable;
 
 public class Feature implements Serializable, Comparable<Feature> {
-    @DocumentId
-    private String id;
-    private String header, body;
+    private String name, desc;
+
 
     public Feature() {
         //empty constructor
     }
 
-    public Feature(String header, String body) {
-        this.header = header;
-        this.body = body;
+    public Feature(String name, String desc) {
+        this.name = name;
+        this.desc = desc;
     }
 
-    public String getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getHeader() {
-        return header;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setHeader(String header) {
-        this.header = header;
-    }
-
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     @Override
     public String toString() {
         return "Feature{" +
-                "id='" + id + '\'' +
-                ", header='" + header + '\'' +
-                ", body='" + body + '\'' +
+                ", header='" + name + '\'' +
+                ", body='" + desc + '\'' +
                 '}';
     }
 
 
     @Override
     public int compareTo(Feature feature) {
-        return this.header.compareTo(feature.getHeader());
+        return this.name.compareTo(feature.getName());
     }
 }

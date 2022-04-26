@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,6 +24,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -47,7 +49,10 @@ public class NpcStatsFragment extends Fragment {
             , "truesight", "passive_perception"};
 
     private TextView name, size, type, alignment, ac, hp, speed, str, dex,
-            con, intel, wis, cha, savingThrows, skills, senses, langs, creatorCR;
+            con, intel, wis, cha, savingThrows, skills, senses, langs
+            , creatorCR, headerAbilities, headerActions;
+    private RecyclerView recyclerAbilities, recyclerActions;
+    private View abilitiesDivider;
     private AbilityAdapter abilityAdapter;
     private ActionAdapter actionAdapter;
     private ArrayList<Feature> abilities = new ArrayList<>(), actions = new ArrayList<>();
@@ -84,20 +89,20 @@ public class NpcStatsFragment extends Fragment {
         initialize(view);
 
         //abilities recycler and adapter
-        RecyclerView abilityRecyclerView = view.findViewById(R.id.detailsAbilitiesRecyclerView);
-        abilityRecyclerView.setHasFixedSize(true);
+        recyclerAbilities = view.findViewById(R.id.detailsAbilitiesRecyclerView);
+        recyclerAbilities.setHasFixedSize(true);
         LinearLayoutManager abilityLayoutManager = new LinearLayoutManager(view.getContext());
-        abilityRecyclerView.setLayoutManager(abilityLayoutManager);
+        recyclerAbilities.setLayoutManager(abilityLayoutManager);
         abilityAdapter = new AbilityAdapter(abilities);
-        abilityRecyclerView.setAdapter(abilityAdapter);
+        recyclerAbilities.setAdapter(abilityAdapter);
 
         //actions recycler and adapter
-        RecyclerView actionRecyclerView = view.findViewById(R.id.detailsActionsRecyclerView);
-        abilityRecyclerView.setHasFixedSize(true);
+        recyclerActions = view.findViewById(R.id.detailsActionsRecyclerView);
+        recyclerActions.setHasFixedSize(true);
         LinearLayoutManager actionLayoutManager = new LinearLayoutManager(view.getContext());
-        abilityRecyclerView.setLayoutManager(actionLayoutManager);
+        recyclerActions.setLayoutManager(actionLayoutManager);
         actionAdapter = new ActionAdapter(actions);
-        actionRecyclerView.setAdapter(actionAdapter);
+        recyclerActions.setAdapter(actionAdapter);
         return view;
     }
 
@@ -110,6 +115,9 @@ public class NpcStatsFragment extends Fragment {
 
     public void initialize(View view) {
         Log.d(A, "npcStats initialize method");
+        headerAbilities = view.findViewById(R.id.detailsAbilities);
+        headerActions = view.findViewById(R.id.detailsActions);
+        abilitiesDivider = view.findViewById(R.id.detailsDivider5);
         name = view.findViewById(R.id.detailsName);
         size = view.findViewById(R.id.detailsSize);
         type = view.findViewById(R.id.detailsType);
@@ -157,8 +165,6 @@ public class NpcStatsFragment extends Fragment {
                     Log.d(A, "npcStats getMonster onResponse isSuccessful");
                     JSONObject json = null;
 
-                    //TODO: FIX OVERLAP OF FRAGMENTS
-                    //TODO: FIX CALLS TO SETTEXT
                     try {
                         json = new JSONObject(response.body().string());
                     } catch (JSONException e) {
@@ -217,7 +223,6 @@ public class NpcStatsFragment extends Fragment {
                             JSONObject senseObject = finalJson.getJSONObject("senses");
                             String senseString = "";
                             for (int i = 0; i < senseTypes.length; i++) {
-                                Log.d(A, "senseTypes length: " + senseTypes.length);
                                 try {
                                     String getSense = String.valueOf(senseObject.get(senseTypes[i]));
                                     if (!getSense.isEmpty()) {
@@ -245,6 +250,40 @@ public class NpcStatsFragment extends Fragment {
                                 crString = "1/" + denom;
                             }
                             creatorCR.setText(crString);
+
+                            //set Abilities
+                            JSONArray abilitiesArray = finalJson.getJSONArray("special_abilities");
+                            Gson gson = new Gson();
+                            if (abilitiesArray.length() > 0) {
+                                for (int i = 0; i < abilitiesArray.length(); i++) {
+                                    Feature feature = gson.fromJson(abilitiesArray.get(i).toString(), Feature.class);
+                                    abilities.add(feature);
+                                }
+                                abilityAdapter.update(abilities);
+                            } else {
+                                abilitiesDivider.setVisibility(View.GONE);
+                                headerAbilities.setVisibility(View.GONE);
+                                recyclerAbilities.setVisibility(View.GONE);
+                            }
+
+
+                            //set Actions
+                            JSONArray actionsArray = finalJson.getJSONArray("actions");
+                            if (actionsArray.length() > 0) {
+                                for (int i = 0; i < actionsArray.length(); i++) {
+                                    JSONObject actionObject = new JSONObject(actionsArray.get(i).toString());
+                                    String name = actionObject.getString("name");
+                                    String desc = actionObject.getString("desc");
+                                    Feature feature = new Feature(name, desc);
+                                    actions.add(feature);
+                                }
+                            } else {
+                                headerActions.setVisibility(View.GONE);
+                                recyclerActions.setVisibility(View.GONE);
+                            }
+
+                            Log.d(A, actions.toString());
+                            actionAdapter.update(actions);
 
                         } catch (JSONException e) {
                             Log.d(A, "try failed");

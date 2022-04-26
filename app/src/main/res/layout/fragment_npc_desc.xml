@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/npcDescConstraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NpcDescFragment" >
+
+    <TextView
+        android:id="@+id/descName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="serif"
+        android:text="@string/name"
+        android:textColor="?attr/colorPrimaryVariant"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/editButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/edit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/descPersHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="serif"
+        android:text="@string/personality"
+        android:textColor="?attr/colorPrimaryVariant"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/descName"
+        app:layout_constraintTop_toBottomOf="@+id/descOccupation" />
+
+    <View
+        android:id="@+id/descDivider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@mipmap/ic_npc_logo_black_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descPersHeader"
+        tools:layout_conversion_absoluteHeight="1dp"
+        tools:layout_conversion_absoluteWidth="0dp" />
+
+    <TextView
+        android:id="@+id/descPersonalityHeader"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/strengths"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/descPersHeader"
+        app:layout_constraintTop_toBottomOf="@id/descDivider" />
+
+    <TextView
+        android:id="@+id/descDeityHeader"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/deity"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/descBackHeader"
+        app:layout_constraintTop_toBottomOf="@+id/descDivider2" />
+
+    <TextView
+        android:id="@+id/descBackHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="serif"
+        android:text="@string/backstory"
+        android:textColor="?attr/colorPrimaryVariant"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/descName"
+        app:layout_constraintTop_toBottomOf="@+id/descFlawsHeader" />
+
+    <View
+        android:id="@+id/descDivider2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@mipmap/ic_npc_logo_black_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descBackHeader"
+        tools:layout_conversion_absoluteHeight="1dp"
+        tools:layout_conversion_absoluteWidth="0dp" />
+
+    <TextView
+        android:id="@+id/descChildhoodHeader"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/childhood"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/descDeityHeader"
+        app:layout_constraintTop_toBottomOf="@+id/descDeityHeader" />
+
+    <TextView
+        android:id="@+id/descOccupation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/occupation"
+        android:textColor="?android:attr/textColorPrimary"
+        app:layout_constraintStart_toStartOf="@+id/descName"
+        app:layout_constraintTop_toBottomOf="@+id/descName" />
+
+    <TextView
+        android:id="@+id/descStrengths"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/strengths"
+        android:textColor="?android:attr/textColorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/descPersonalityHeader"
+        app:layout_constraintTop_toTopOf="@+id/descPersonalityHeader" />
+
+    <TextView
+        android:id="@+id/descFlawsHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/flaws"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/descPersonalityHeader"
+        app:layout_constraintTop_toBottomOf="@+id/descPersonalityHeader" />
+
+    <TextView
+        android:id="@+id/descFlaws"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/flaws"
+        android:textColor="?android:attr/textColorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/descFlawsHeader"
+        app:layout_constraintTop_toTopOf="@+id/descFlawsHeader" />
+
+    <TextView
+        android:id="@+id/descDeity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/deity"
+        android:textColor="?android:attr/textColorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/descDeityHeader"
+        app:layout_constraintTop_toTopOf="@+id/descDeityHeader" />
+
+    <TextView
+        android:id="@+id/descChildhood"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/childhood"
+        android:textColor="?android:attr/textColorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/descChildhoodHeader"
+        app:layout_constraintTop_toTopOf="@+id/descChildhoodHeader" />
+
+    <TextView
+        android:id="@+id/descNotesHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="serif"
+        android:text="@string/notes"
+        android:textColor="?attr/colorPrimaryVariant"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/descChildhoodHeader"
+        app:layout_constraintTop_toBottomOf="@+id/descChildhoodHeader" />
+
+    <View
+        android:id="@+id/descDivider3"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@mipmap/ic_npc_logo_black_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descNotesHeader"
+        tools:layout_conversion_absoluteHeight="1dp"
+        tools:layout_conversion_absoluteWidth="0dp" />
+
+    <TextView
+        android:id="@+id/descNotes"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/notes"
+        android:textColor="?android:attr/textColorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/descDivider3"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/descDivider3"
+        app:layout_constraintTop_toBottomOf="@+id/descDivider3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class Npc implements Serializable, Comparable<Npc> {
     @DocumentId
     private String id;
-    private String name, type, creator, creator_id;
+    private String name, type, index, creator, creator_id;
     private boolean publicNpc;
     private Description description;
 
@@ -15,14 +15,16 @@ public class Npc implements Serializable, Comparable<Npc> {
         //empty constructor
     }
 
-    public Npc(String id, String name, String type, String creator
-            , String creator_id, boolean publicNpc) {
+    public Npc(String id, String name, String type, String index
+            , String creator, String creator_id, boolean publicNpc, Description description) {
         this.id = id;
         this.name = name;
         this.type = type;
+        this.index = index;
         this.creator = creator;
         this.creator_id = creator_id;
         this.publicNpc = publicNpc;
+        this.description = description;
     }
 
     public String getId() {
@@ -49,6 +51,14 @@ public class Npc implements Serializable, Comparable<Npc> {
         this.type = type;
     }
 
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
+    }
+
     public String getCreator() {
         return creator;
     }
@@ -65,14 +75,6 @@ public class Npc implements Serializable, Comparable<Npc> {
         this.creator_id = creator_id;
     }
 
-    public Description getDescription() {
-        return description;
-    }
-
-    public void setDescription(Description description) {
-        this.description = description;
-    }
-
     public boolean isPublicNpc() {
         return publicNpc;
     }
@@ -81,12 +83,21 @@ public class Npc implements Serializable, Comparable<Npc> {
         this.publicNpc = publicNpc;
     }
 
+    public Description getDescription() {
+        return description;
+    }
+
+    public void setDescription(Description description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return "Npc{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
+                ", index='" + index + '\'' +
                 ", creator='" + creator + '\'' +
                 ", creator_id='" + creator_id + '\'' +
                 ", publicNpc=" + publicNpc +

@@ -8,10 +8,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
-import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -26,7 +24,9 @@ public class MainActivity extends AppCompatActivity
         , LoginFragment.LoginFragmentListener
         , SignUpFragment.SignUpFragmentListener
         , ProfileFragment.ProfileListener
-        , EditFragment.EditListener {
+        , EditFragment.EditListener
+        , NpcDescFragment.DetailsListener
+        , NewDescFragment.NewDescListener {
     private static final String A = "Arrived at";
     private static final String E = "Error";
     private Random random = new Random();
@@ -145,10 +145,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void filter() {
-        Log.d(A, "main filter");
+    public void description(Npc npc) {
+        Log.d(A, "main newDescription");
+        getSupportFragmentManager().popBackStack();
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragmentContainerView, new FilterFragment())
+                .replace(R.id.fragmentContainerView, NewDescFragment.newInstance(npc))
                 .addToBackStack(null)
                 .commit();
     }
@@ -187,15 +188,6 @@ public class MainActivity extends AppCompatActivity
                                 .commit();
                     });
                 });
-    }
-
-    @Override
-    public void customize() {
-        Log.d(A, "main customize");
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainerView, new EditNpcFragment())
-                .addToBackStack(null)
-                .commit();
     }
 
     @Override
@@ -273,5 +265,72 @@ public class MainActivity extends AppCompatActivity
         Log.d(A, "main cancelUpdate");
         getSupportFragmentManager().popBackStack();
         profile();
+    }
+
+    @Override
+    public void editDesc(Npc npc) {
+        Log.d(A, "main editDesc");
+        getSupportFragmentManager().popBackStack();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainerView, EditNpcFragment.newInstance(npc))
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void rerollDesc(Npc npc) {
+        Log.d(A, "main rerollDesc");
+        Description desc = new Description();
+        //TODO implement randomized description pull
+        /*
+        //current monster database is fixed size - 332
+        int min = 1;
+        int max = 332;
+        int result = random.nextInt(max - min) + min;
+        DocumentReference docRef = db.collection("monsters").document(String.valueOf(result));
+        docRef.get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    Log.d(A, "monsterGet success");
+                    Monster monster = documentSnapshot.toObject(Monster.class);
+                    Log.d(A, "monsterGet index: " + monster.getIndex());
+                    runOnUiThread(() -> {
+                        getSupportFragmentManager().popBackStack();
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.fragmentContainerView
+                                        , CreatorFragment.newInstance(monster.getIndex()))
+                                .addToBackStack(null)
+                                .commit();
+                    });
+                })
+                .addOnFailureListener(error -> {
+                    Log.d(E, "monsterGet failed: " + error.getMessage());
+                    String errorDefault = "aboleth";
+                    runOnUiThread(() -> {
+                        getSupportFragmentManager().popBackStack();
+                        getSupportFragmentManager().beginTransaction()
+                                .add(R.id.fragmentContainerView
+                                        , CreatorFragment.newInstance(errorDefault))
+                                .addToBackStack(null)
+                                .commit();
+                    });
+                });
+
+         */
+    }
+
+    @Override
+    public void cancelDesc(String index) {
+        Log.d(A, "main cancelDesc");
+        getSupportFragmentManager().popBackStack();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainerView, CreatorFragment.newInstance(index))
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void saveNpc(Npc npc) {
+        Log.d(A, "main saveNpc");
+        //TODO implement save npc to database
     }
 }

@@ -30,7 +30,7 @@ public class AbilityAdapter extends RecyclerView.Adapter<AbilityAdapter.AbilityV
     public AbilityAdapter.AbilityViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d(A, "AbilityAdapter onCreateViewHolder");
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.feature_row_item, parent, false);
+                .inflate(R.layout.ability_row_item, parent, false);
         AbilityAdapter.AbilityViewHolder abilitiesViewHolder =
                 new AbilityViewHolder(view);
         return abilitiesViewHolder;
@@ -43,13 +43,18 @@ public class AbilityAdapter extends RecyclerView.Adapter<AbilityAdapter.AbilityV
 
         holder.position = holder.getAdapterPosition();
 
-        holder.header.setText(ability.getHeader());
-        holder.body.setText(ability.getBody());
+        holder.header.setText(ability.getName());
+        holder.body.setText(ability.getDesc());
     }
 
     @Override
     public int getItemCount() {
         return this.abilities.size();
+    }
+
+    public void update(ArrayList<Feature> newAbilities) {
+        abilities = newAbilities;
+        this.notifyDataSetChanged();
     }
 
     public class AbilityViewHolder extends RecyclerView.ViewHolder {
@@ -60,8 +65,8 @@ public class AbilityAdapter extends RecyclerView.Adapter<AbilityAdapter.AbilityV
         public AbilityViewHolder(@NonNull View itemView) {
             super(itemView);
             rootView = itemView;
-            header = itemView.findViewById(R.id.featureTitle);
-            body = itemView.findViewById(R.id.featureBody);
+            header = itemView.findViewById(R.id.abilityTitle);
+            body = itemView.findViewById(R.id.abilityBody);
         }
     }
 }

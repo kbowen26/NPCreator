@@ -82,7 +82,6 @@ public class CreatorFragment extends Fragment implements View.OnClickListener {
 
 
         view.findViewById(R.id.rerollButton).setOnClickListener(this);
-        view.findViewById(R.id.filterButton).setOnClickListener(this);
         view.findViewById(R.id.whoAreTheyButton).setOnClickListener(this);
 
         getChildFragmentManager().beginTransaction()
@@ -99,11 +98,12 @@ public class CreatorFragment extends Fragment implements View.OnClickListener {
             case R.id.rerollButton:
                 creatorListener.reroll();
                 break;
-            case R.id.filterButton:
-                creatorListener.filter();
-                break;
             case R.id.whoAreTheyButton:
-                creatorListener.customize();
+                Npc npc = new Npc();
+                npc.setIndex(index);
+                npc.setCreator(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+                npc.setCreator_id(FirebaseAuth.getInstance().getUid());
+                creatorListener.description(npc);
                 break;
             default:
                 break;
@@ -117,8 +117,7 @@ public class CreatorFragment extends Fragment implements View.OnClickListener {
     }
 
     interface CreatorListener {
-        void filter();
+        void description(Npc npc);
         void reroll();
-        void customize();
     }
 }

@@ -12,22 +12,21 @@ import com.google.android.material.tabs.TabLayout;
 
 public class NpcFragment extends Fragment {
 
-    // TODO: FILL OUT NPC FRAGMENT
     private static final String A = "Arrived at";
     private static final String E = "Error";
-    private static final String ARG_INDEX = "index";
+    private static final String ARG_NPC = "npc";
 
-    private String index;
+    private Npc npc;
     TabLayout npcTabs;
 
     public NpcFragment() {
         // Required empty public constructor
     }
 
-    public static NpcFragment newInstance(String index) {
+    public static NpcFragment newInstance(Npc npc) {
         NpcFragment fragment = new NpcFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_INDEX, index);
+        args.putSerializable(ARG_NPC, npc);
         fragment.setArguments(args);
         return fragment;
     }
@@ -36,7 +35,7 @@ public class NpcFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            this.index = getArguments().getString(ARG_INDEX);
+            this.npc = (Npc) getArguments().getSerializable(ARG_NPC);
         }
     }
 
@@ -47,16 +46,17 @@ public class NpcFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_npc, container, false);
         npcTabs = view.findViewById(R.id.npcTabLayout);
 
+        //TODO implement tabs
         npcTabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if (tab.getId() == npcTabs.getTabAt(0).getId()) {
                     getActivity().getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.npcFragmentContainerView, NpcStatsFragment.newInstance(index))
+                            .replace(R.id.npcFragmentContainerView, NpcStatsFragment.newInstance(npc.getIndex()))
                             .commit();
                 } else {
                     getActivity().getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.npcFragmentContainerView, NpcDetailsFragment.newInstance(index))
+                            .replace(R.id.npcFragmentContainerView, NpcDescFragment.newInstance(npc))
                             .commit();
                 }
             }

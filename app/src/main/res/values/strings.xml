@@ -46,8 +46,15 @@
     <string name="Abilities">Abilities</string>
     <string name="createdBy">Created by</string>
     <string name="personality">Personality</string>
-    <string name="goals">Goals</string>
+    <string name="deity">Deity:</string>
     <string name="backstory">Backstory</string>
+    <string name="occupation">Occupation</string>
+    <string name="strengths">Strengths:</string>
+    <string name="flaws">Flaws:</string>
+    <string name="childhood">Childhood:</string>
+    <string name="notes">Notes</string>
+    <string name="publicSwitch">Post publicly?</string>
+    <string name="saveNpc">Save NPC</string>
 
     <string name="emailHint">Email</string>
     <string name="passwordHint">Password</string>
@@ -68,4 +75,7 @@
         The P is made up of the last stroke of the N, and the C is tucked
         under the bowl of the P.</string>
     <string name="editButtonDesc">Pencil</string>
+    <string name="scrollViewDesc">NPC stats scroll view</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

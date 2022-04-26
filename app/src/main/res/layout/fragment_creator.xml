@@ -9,25 +9,17 @@
 
     <Button
         android:id="@+id/rerollButton"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="50dp"
         android:text="@string/reroll"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextContrastCheck" />
 
-    <Button
-        android:id="@+id/filterButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="50dp"
-        android:text="@string/filter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TextContrastCheck" />
     <!--
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/creatorNpcFragmentContainerView"
@@ -55,15 +47,16 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="TextContrastCheck" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/creatorNpcFragmentContainerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:contentDescription="@string/scrollViewDesc"
+        android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@+id/whoAreTheyButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rerollButton">
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

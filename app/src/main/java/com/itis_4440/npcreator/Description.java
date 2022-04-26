@@ -4,24 +4,23 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Description implements Serializable, Comparable<Description> {
-    String name, circumstances, childhood, deity, occupation, monsterName;
-    ArrayList<String> flaws, strengths;
+    String name, childhood, deity, occupation, monsterName
+            , flaws, strengths, notes;
 
     public Description() {
         //empty constructor
     }
 
-    public Description(String name, String circumstances, String childhood
-            , String deity, String occupation, String monsterName, ArrayList<String> flaws
-            , ArrayList<String> strengths) {
+    public Description(String name, String childhood, String deity, String occupation
+            , String monsterName, String flaws, String strengths, String notes) {
         this.name = name;
-        this.circumstances = circumstances;
         this.childhood = childhood;
         this.deity = deity;
         this.occupation = occupation;
         this.monsterName = monsterName;
         this.flaws = flaws;
         this.strengths = strengths;
+        this.notes = notes;
     }
 
     public String getName() {
@@ -30,14 +29,6 @@ public class Description implements Serializable, Comparable<Description> {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getCircumstances() {
-        return circumstances;
-    }
-
-    public void setCircumstances(String circumstances) {
-        this.circumstances = circumstances;
     }
 
     public String getChildhood() {
@@ -72,33 +63,41 @@ public class Description implements Serializable, Comparable<Description> {
         this.monsterName = monsterName;
     }
 
-    public ArrayList<String> getFlaws() {
+    public String getFlaws() {
         return flaws;
     }
 
-    public void setFlaws(ArrayList<String> flaws) {
+    public void setFlaws(String flaws) {
         this.flaws = flaws;
     }
 
-    public ArrayList<String> getStrengths() {
+    public String getStrengths() {
         return strengths;
     }
 
-    public void setStrengths(ArrayList<String> strengths) {
+    public void setStrengths(String strengths) {
         this.strengths = strengths;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     @Override
     public String toString() {
         return "Description{" +
                 "name='" + name + '\'' +
-                ", circumstances='" + circumstances + '\'' +
                 ", childhood='" + childhood + '\'' +
                 ", deity='" + deity + '\'' +
                 ", occupation='" + occupation + '\'' +
                 ", monsterName='" + monsterName + '\'' +
-                ", flaws=" + flaws +
-                ", strengths=" + strengths +
+                ", flaws='" + flaws + '\'' +
+                ", strengths='" + strengths + '\'' +
+                ", notes='" + notes + '\'' +
                 '}';
     }
 

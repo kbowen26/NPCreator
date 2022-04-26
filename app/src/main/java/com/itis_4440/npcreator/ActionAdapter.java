@@ -19,6 +19,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ActionView
         Log.d(A, "ActionAdapter Constructor");
 
         if (data.size() > 0) {
+            Log.d(A, data.toString());
             this.actions = data;
         } else {
             actions = new ArrayList<>();
@@ -30,7 +31,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ActionView
     public ActionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d(A, "ActionAdapter onCreateViewHolder");
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.feature_row_item, parent, false);
+                .inflate(R.layout.action_row_item, parent, false);
         ActionViewHolder abilitiesViewHolder =
                 new ActionViewHolder(view);
         return abilitiesViewHolder;
@@ -43,13 +44,18 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ActionView
 
         holder.position = holder.getAdapterPosition();
 
-        holder.header.setText(ability.getHeader());
-        holder.body.setText(ability.getBody());
+        holder.header.setText(ability.getName());
+        holder.body.setText(ability.getDesc());
     }
 
     @Override
     public int getItemCount() {
         return this.actions.size();
+    }
+
+    public void update(ArrayList<Feature> newActions) {
+        actions = newActions;
+        this.notifyDataSetChanged();
     }
 
     public class ActionViewHolder extends RecyclerView.ViewHolder {
@@ -60,8 +66,8 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ActionView
         public ActionViewHolder(@NonNull View itemView) {
             super(itemView);
             rootView = itemView;
-            header = itemView.findViewById(R.id.featureTitle);
-            body = itemView.findViewById(R.id.featureBody);
+            header = itemView.findViewById(R.id.actionTitle);
+            body = itemView.findViewById(R.id.actionBody);
         }
     }
 }
