@@ -171,125 +171,127 @@ public class NpcStatsFragment extends Fragment {
                         e.printStackTrace();
                     }
                     JSONObject finalJson = json;
-                    getActivity().runOnUiThread(() -> {
-                        try {
-                            name.setText(finalJson.getString("name"));
-                            size.setText(finalJson.getString("size"));
-                            type.setText(finalJson.getString("type") + ", ");
-                            alignment.setText(finalJson.getString("alignment"));
-                            ac.setText(finalJson.getString("armor_class"));
-                            hp.setText(finalJson.getString("hit_points") + " (" + finalJson.getString("hit_dice") + ")");
+                    if(getActivity() != null) {
+                        getActivity().runOnUiThread(() -> {
+                            try {
+                                name.setText(finalJson.getString("name"));
+                                size.setText(finalJson.getString("size"));
+                                type.setText(finalJson.getString("type") + ", ");
+                                alignment.setText(finalJson.getString("alignment"));
+                                ac.setText(finalJson.getString("armor_class"));
+                                hp.setText(finalJson.getString("hit_points") + " (" + finalJson.getString("hit_dice") + ")");
 
-                            //set speeds
-                            JSONObject speedObject = finalJson.getJSONObject("speed");
-                            String speedString = "";
-                            for (int i = 0; i < speedTypes.length; i++) {
-                                Log.d(A, "speedTypes length: " + speedTypes.length);
-                                try {
-                                    String getSpeed = speedObject.getString(speedTypes[i]);
-                                    if (!getSpeed.isEmpty()) {
-                                        if (speedTypes[i].matches("fly") && speedObject.getBoolean("hover")) {
-                                            if (speedString.matches("")) {
-                                                speedString += speedTypes[i] + " " + getSpeed + " (hover)";
+                                //set speeds
+                                JSONObject speedObject = finalJson.getJSONObject("speed");
+                                String speedString = "";
+                                for (int i = 0; i < speedTypes.length; i++) {
+                                    Log.d(A, "speedTypes length: " + speedTypes.length);
+                                    try {
+                                        String getSpeed = speedObject.getString(speedTypes[i]);
+                                        if (!getSpeed.isEmpty()) {
+                                            if (speedTypes[i].matches("fly") && speedObject.getBoolean("hover")) {
+                                                if (speedString.matches("")) {
+                                                    speedString += speedTypes[i] + " " + getSpeed + " (hover)";
+                                                } else {
+                                                    speedString += ", " + speedTypes[i] + " " + getSpeed + " (hover)";
+                                                }
                                             } else {
-                                                speedString += ", " + speedTypes[i] + " " + getSpeed + " (hover)";
-                                            }
-                                        } else {
-                                            if (i == 0) {
-                                                speedString += " " + getSpeed;
-                                            } else {
-                                                speedString += ", " + speedTypes[i] + " " + getSpeed;
+                                                if (i == 0) {
+                                                    speedString += " " + getSpeed;
+                                                } else {
+                                                    speedString += ", " + speedTypes[i] + " " + getSpeed;
+                                                }
                                             }
                                         }
+                                    } catch (Exception e) {
+                                        Log.d(E, e.getMessage());
                                     }
-                                } catch (Exception e) {
-                                    Log.d(E, e.getMessage());
                                 }
-                            }
-                            speed.setText(speedString);
+                                speed.setText(speedString);
 
-                            //set ability scores
-                            str.setText(String.valueOf(finalJson.getInt("strength")));
-                            dex.setText(String.valueOf(finalJson.getInt("dexterity")));
-                            con.setText(String.valueOf(finalJson.getInt("constitution")));
-                            intel.setText(String.valueOf(finalJson.getInt("intelligence")));
-                            wis.setText(String.valueOf(finalJson.getInt("wisdom")));
-                            cha.setText(String.valueOf(finalJson.getInt("charisma")));
+                                //set ability scores
+                                str.setText(String.valueOf(finalJson.getInt("strength")));
+                                dex.setText(String.valueOf(finalJson.getInt("dexterity")));
+                                con.setText(String.valueOf(finalJson.getInt("constitution")));
+                                intel.setText(String.valueOf(finalJson.getInt("intelligence")));
+                                wis.setText(String.valueOf(finalJson.getInt("wisdom")));
+                                cha.setText(String.valueOf(finalJson.getInt("charisma")));
 
-                            //TODO set proficiencies - saving throws
-                            //TODO set proficiencies - skills
+                                //TODO set proficiencies - saving throws
+                                //TODO set proficiencies - skills
 
-                            //set senses
-                            JSONObject senseObject = finalJson.getJSONObject("senses");
-                            String senseString = "";
-                            for (int i = 0; i < senseTypes.length; i++) {
-                                try {
-                                    String getSense = String.valueOf(senseObject.get(senseTypes[i]));
-                                    if (!getSense.isEmpty()) {
-                                        if (senseString.matches("")) {
-                                            senseString += senseTypes[i] + " +" + getSense;
-                                        } else {
-                                            senseString += ", " + senseTypes[i] + " " + getSense;
+                                //set senses
+                                JSONObject senseObject = finalJson.getJSONObject("senses");
+                                String senseString = "";
+                                for (int i = 0; i < senseTypes.length; i++) {
+                                    try {
+                                        String getSense = String.valueOf(senseObject.get(senseTypes[i]));
+                                        if (!getSense.isEmpty()) {
+                                            if (senseString.matches("")) {
+                                                senseString += senseTypes[i] + " +" + getSense;
+                                            } else {
+                                                senseString += ", " + senseTypes[i] + " " + getSense;
+                                            }
                                         }
+                                    } catch (Exception e) {
+                                        Log.d(E, e.getMessage());
                                     }
-                                } catch (Exception e) {
-                                    Log.d(E, e.getMessage());
                                 }
-                            }
-                            senses.setText(senseString);
+                                senses.setText(senseString);
 
-                            // set languages
-                            langs.setText(finalJson.getString("languages"));
+                                // set languages
+                                langs.setText(finalJson.getString("languages"));
 
-                            //set Challenge Rating
-                            double crDouble = Double.valueOf(String.valueOf(finalJson.get("challenge_rating")));
-                            int finalCr = (int) crDouble;
-                            String crString = String.valueOf(finalCr);
-                            if (1 > crDouble) {
-                                int denom = (int) (1 / crDouble);
-                                crString = "1/" + denom;
-                            }
-                            creatorCR.setText(crString);
-
-                            //set Abilities
-                            JSONArray abilitiesArray = finalJson.getJSONArray("special_abilities");
-                            Gson gson = new Gson();
-                            if (abilitiesArray.length() > 0) {
-                                for (int i = 0; i < abilitiesArray.length(); i++) {
-                                    Feature feature = gson.fromJson(abilitiesArray.get(i).toString(), Feature.class);
-                                    abilities.add(feature);
+                                //set Challenge Rating
+                                double crDouble = Double.valueOf(String.valueOf(finalJson.get("challenge_rating")));
+                                int finalCr = (int) crDouble;
+                                String crString = String.valueOf(finalCr);
+                                if (1 > crDouble) {
+                                    int denom = (int) (1 / crDouble);
+                                    crString = "1/" + denom;
                                 }
-                                abilityAdapter.update(abilities);
-                            } else {
-                                abilitiesDivider.setVisibility(View.GONE);
-                                headerAbilities.setVisibility(View.GONE);
-                                recyclerAbilities.setVisibility(View.GONE);
-                            }
+                                creatorCR.setText(crString);
 
-
-                            //set Actions
-                            JSONArray actionsArray = finalJson.getJSONArray("actions");
-                            if (actionsArray.length() > 0) {
-                                for (int i = 0; i < actionsArray.length(); i++) {
-                                    JSONObject actionObject = new JSONObject(actionsArray.get(i).toString());
-                                    String name = actionObject.getString("name");
-                                    String desc = actionObject.getString("desc");
-                                    Feature feature = new Feature(name, desc);
-                                    actions.add(feature);
+                                //set Abilities
+                                JSONArray abilitiesArray = finalJson.getJSONArray("special_abilities");
+                                Gson gson = new Gson();
+                                if (abilitiesArray.length() > 0) {
+                                    for (int i = 0; i < abilitiesArray.length(); i++) {
+                                        Feature feature = gson.fromJson(abilitiesArray.get(i).toString(), Feature.class);
+                                        abilities.add(feature);
+                                    }
+                                    abilityAdapter.update(abilities);
+                                } else {
+                                    abilitiesDivider.setVisibility(View.GONE);
+                                    headerAbilities.setVisibility(View.GONE);
+                                    recyclerAbilities.setVisibility(View.GONE);
                                 }
-                            } else {
-                                headerActions.setVisibility(View.GONE);
-                                recyclerActions.setVisibility(View.GONE);
+
+
+                                //set Actions
+                                JSONArray actionsArray = finalJson.getJSONArray("actions");
+                                if (actionsArray.length() > 0) {
+                                    for (int i = 0; i < actionsArray.length(); i++) {
+                                        JSONObject actionObject = new JSONObject(actionsArray.get(i).toString());
+                                        String name = actionObject.getString("name");
+                                        String desc = actionObject.getString("desc");
+                                        Feature feature = new Feature(name, desc);
+                                        actions.add(feature);
+                                    }
+                                } else {
+                                    headerActions.setVisibility(View.GONE);
+                                    recyclerActions.setVisibility(View.GONE);
+                                }
+
+                                Log.d(A, actions.toString());
+                                actionAdapter.update(actions);
+
+                            } catch (JSONException e) {
+                                Log.d(A, "try failed");
+                                e.printStackTrace();
                             }
-
-                            Log.d(A, actions.toString());
-                            actionAdapter.update(actions);
-
-                        } catch (JSONException e) {
-                            Log.d(A, "try failed");
-                            e.printStackTrace();
-                        }
-                    });
+                        });
+                    }
                 } else {
                     ResponseBody responseBody = response.body();
                     String body = responseBody.string();

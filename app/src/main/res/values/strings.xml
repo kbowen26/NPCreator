@@ -50,7 +50,15 @@
     <string name="backstory">Backstory</string>
     <string name="occupation">Occupation</string>
     <string name="strengths">Strengths:</string>
+    <string name="strengthsHeader">Strengths</string>
+    <string name="strength1Hint">Strength 1</string>
+    <string name="strength2Hint">Strength 2</string>
+    <string name="strength3Hint">Strength 3</string>
     <string name="flaws">Flaws:</string>
+    <string name="flawsHeader">Flaws</string>
+    <string name="flaw1Hint">Flaw 1</string>
+    <string name="flaw2Hint">Flaw 2</string>
+    <string name="flaw3Hint">Flaw 3</string>
     <string name="childhood">Childhood:</string>
     <string name="notes">Notes</string>
     <string name="publicSwitch">Post publicly?</string>

@@ -8,6 +8,9 @@
     </group>
     <group android:id="@+id/loggedInGroup">
         <item
+            android:id="@+id/logoutItem"
+            android:title="@string/logout" />
+        <item
             android:id="@+id/profileItem"
             android:title="@string/profile" />
         <item

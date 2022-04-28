@@ -3,6 +3,7 @@ package com.itis_4440.npcreator;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -90,6 +91,9 @@ public class MainActivity extends AppCompatActivity
                 return true;
             case R.id.publicNPCsItem:
                 publicNpcs();
+                return true;
+            case R.id.logoutItem:
+                logout();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -332,5 +336,15 @@ public class MainActivity extends AppCompatActivity
     public void saveNpc(Npc npc) {
         Log.d(A, "main saveNpc");
         //TODO implement save npc to database
+    }
+
+    private void logout() {
+        Log.d(A, "main logout");
+        FirebaseAuth.getInstance().signOut();
+
+        Intent newIntent = new Intent(this, MainActivity.class);
+        newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(newIntent);
+        this.finish();
     }
 }
