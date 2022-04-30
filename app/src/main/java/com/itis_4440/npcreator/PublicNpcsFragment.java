@@ -17,6 +17,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,7 +25,8 @@ import java.util.Collections;
 
 public class PublicNpcsFragment extends Fragment {
     private static final String A = "Arrived at";
-    private static final String ARG_PUBLIC = "public";
+    private static final String E = "Error";
+    private static final String ARG_PUBLIC = "publicNpc";
 
     private FirebaseFirestore db;
     private final ArrayList<Npc> npcs = new ArrayList<>();
@@ -73,7 +75,6 @@ public class PublicNpcsFragment extends Fragment {
                 .addSnapshotListener((value, error) -> {
                     npcs.clear();
                     for (QueryDocumentSnapshot qds : value) {
-                        Log.d(A, qds.toString());
                         Npc newNpc = qds.toObject(Npc.class);
                         npcs.add(newNpc);
                     }

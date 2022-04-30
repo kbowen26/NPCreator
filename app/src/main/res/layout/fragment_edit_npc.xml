@@ -7,20 +7,299 @@
     android:layout_height="match_parent"
     tools:context=".EditNpcFragment" >
 
-    <EditText
-        android:id="@+id/editNpcName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/name"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/editNpcSubmit"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="DuplicateSpeakableTextCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/editNpcMonsterType">
+
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/scrollConstraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/editNpcFlaw3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:ems="10"
+                    android:hint="@string/flaw3Hint"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="@+id/editNpcFlaw2"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/editNpcFlaw2"
+                    app:layout_constraintTop_toBottomOf="@+id/editNpcFlaw2"
+                    tools:ignore="TextContrastCheck" />
+
+                <View
+                    android:id="@+id/editNpcDivider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@mipmap/ic_npc_logo_black_background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editNpcStrengthsHeader"
+                    tools:layout_conversion_absoluteHeight="1dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
+
+                <EditText
+                    android:id="@+id/editNpcStrength3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:ems="10"
+                    android:hint="@string/strength3Hint"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="@+id/editNpcStrength2"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/editNpcStrength2"
+                    app:layout_constraintTop_toBottomOf="@+id/editNpcStrength2"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/editNpcFlawsHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="serif"
+                    android:text="@string/flawsHeader"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/editNpcStrength3"
+                    app:layout_constraintTop_toBottomOf="@+id/editNpcStrength3" />
+
+                <EditText
+                    android:id="@+id/editNpcOccupation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:ems="10"
+                    android:hint="@string/occupationHint"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="@+id/editNpcName"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/editNpcName"
+                    app:layout_constraintTop_toBottomOf="@+id/editNpcName"
+                    tools:ignore="TextContrastCheck" />
+
+                <EditText
+                    android:id="@+id/editNpcDeity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:ems="10"
+                    android:hint="@string/deityHint"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="@+id/editNpcOccupation"
+                    app:layout_constraintHorizontal_bias="0.497"
+                    app:layout_constraintStart_toStartOf="@+id/editNpcOccupation"
+                    app:layout_constraintTop_toBottomOf="@+id/editNpcOccupation"
+                    tools:ignore="TextContrastCheck" />
+
+                <EditText
+                    android:id="@+id/editNpcStrength1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:ems="10"
+                    android:hint="@string/strength1Hint"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="@+id/editNpcDivider"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/editNpcDivider"
+                    app:layout_constraintTop_toBottomOf="@+id/editNpcDivider"
+                    tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
+
+                <EditText
+                    android:id="@+id/editNpcStrength2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:ems="10"
+                    android:hint="@string/strength2Hint"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="@+id/editNpcStrength1"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/editNpcStrength1"
+                    app:layout_constraintTop_toBottomOf="@+id/editNpcStrength1"
+                    tools:ignore="TextContrastCheck" />
+
+                <EditText
+                    android:id="@+id/editNpcFlaw2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:ems="10"
+                    android:hint="@string/flaw2Hint"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="@+id/editNpcFlaw1"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/editNpcFlaw1"
+                    app:layout_constraintTop_toBottomOf="@+id/editNpcFlaw1" />
+
+                <TextView
+                    android:id="@+id/editNpcStrengthsHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="serif"
+                    android:text="@string/strengthsHeader"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/editNpcChildhood"
+                    app:layout_constraintTop_toBottomOf="@+id/editNpcChildhood" />
+
+                <EditText
+                    android:id="@+id/editNpcFlaw1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:ems="10"
+                    android:hint="@string/flaw1Hint"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="@+id/editNpcDivider2"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/editNpcDivider2"
+                    app:layout_constraintTop_toBottomOf="@+id/editNpcDivider2"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
+
+                <View
+                    android:id="@+id/editNpcDivider2"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@mipmap/ic_npc_logo_black_background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/editNpcFlawsHeader"
+                    app:layout_constraintTop_toBottomOf="@+id/editNpcFlawsHeader"
+                    tools:layout_conversion_absoluteHeight="1dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
+
+                <EditText
+                    android:id="@+id/editNpcChildhood"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:ems="10"
+                    android:hint="@string/childhoodHint"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="@+id/editNpcOccupation"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/editNpcOccupation"
+                    app:layout_constraintTop_toBottomOf="@+id/editNpcDeity"
+                    tools:ignore="TextContrastCheck" />
+
+                <EditText
+                    android:id="@+id/editNpcName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:ems="10"
+                    android:hint="@string/nameHint"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.497"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
+
+                <TextView
+                    android:id="@+id/editNpcNotesHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="serif"
+                    android:text="@string/notes"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/editNpcFlaw3"
+                    app:layout_constraintTop_toBottomOf="@+id/editNpcFlaw3" />
+
+                <View
+                    android:id="@+id/editNpcDivider3"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@mipmap/ic_npc_logo_black_background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/editNpcFlawsHeader"
+                    app:layout_constraintTop_toBottomOf="@+id/editNpcNotesHeader"
+                    tools:layout_conversion_absoluteHeight="1dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
+
+                <EditText
+                    android:id="@+id/editNpcNotesEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:hint="@string/notesHint"
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/editNpcFlawsHeader"
+                    app:layout_constraintTop_toBottomOf="@+id/editNpcDivider3"
+                    tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/editNpcSubmit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
         android:id="@+id/editNpcCancelButton"
@@ -33,175 +312,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editNpcOccupation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/occupation"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="@+id/editNpcCancelButton"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editNpcName"
-        app:layout_constraintTop_toBottomOf="@+id/editNpcName"
-        android:importantForAutofill="no" />
-
     <TextView
-        android:id="@+id/editNpcStrengthsHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="serif"
-        android:text="@string/strengthsHeader"
-        android:textColor="?attr/colorPrimaryVariant"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/editNpcOccupation"
-        app:layout_constraintTop_toBottomOf="@+id/editNpcOccupation" />
-
-    <View
-        android:id="@+id/editNpcDivider"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="8dp"
-        android:background="@mipmap/ic_npc_logo_black_background"
-        app:layout_constraintEnd_toEndOf="@+id/editNpcOccupation"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editNpcStrengthsHeader"
-        app:layout_constraintTop_toBottomOf="@+id/editNpcStrengthsHeader"
-        tools:layout_conversion_absoluteHeight="1dp"
-        tools:layout_conversion_absoluteWidth="0dp" />
-
-    <EditText
-        android:id="@+id/editNpcStrength1"
+        android:id="@+id/editNpcMonsterType"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/strength1Hint"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="@+id/editNpcDivider"
-        app:layout_constraintStart_toStartOf="@+id/editNpcDivider"
-        app:layout_constraintTop_toBottomOf="@+id/editNpcDivider"
-        tools:ignore="DuplicateSpeakableTextCheck" />
-
-    <EditText
-        android:id="@+id/editNpcStrength2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/strength2Hint"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="@+id/editNpcStrength1"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@+id/editNpcStrength1"
-        app:layout_constraintTop_toBottomOf="@+id/editNpcStrength1" />
-
-    <EditText
-        android:id="@+id/editNpcStrength3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/strength3Hint"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="@+id/editNpcStrength2"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@+id/editNpcStrength2"
-        app:layout_constraintTop_toBottomOf="@+id/editNpcStrength2" />
-
-    <TextView
-        android:id="@+id/editNpcFlawsHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="serif"
-        android:text="@string/flawsHeader"
-        android:textColor="?attr/colorPrimaryVariant"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/editNpcStrength3"
-        app:layout_constraintTop_toBottomOf="@+id/editNpcStrength3" />
-
-    <View
-        android:id="@+id/editNpcDivider2"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="8dp"
-        android:background="@mipmap/ic_npc_logo_black_background"
-        app:layout_constraintEnd_toEndOf="@+id/editNpcOccupation"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editNpcStrengthsHeader"
-        app:layout_constraintTop_toBottomOf="@+id/editNpcFlawsHeader"
-        tools:layout_conversion_absoluteHeight="1dp"
-        tools:layout_conversion_absoluteWidth="0dp" />
-
-    <EditText
-        android:id="@+id/editNpcFlaw1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/flaw1Hint"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="@+id/editNpcDivider2"
-        app:layout_constraintHorizontal_bias="0.514"
-        app:layout_constraintStart_toStartOf="@+id/editNpcDivider2"
-        app:layout_constraintTop_toBottomOf="@+id/editNpcDivider2"
-        tools:ignore="DuplicateSpeakableTextCheck" />
-
-    <EditText
-        android:id="@+id/editNpcFlaw2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/flaw2Hint"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="@+id/editNpcDivider2"
-        app:layout_constraintHorizontal_bias="0.514"
-        app:layout_constraintStart_toStartOf="@+id/editNpcDivider2"
-        app:layout_constraintTop_toBottomOf="@+id/editNpcFlaw1" />
-
-    <EditText
-        android:id="@+id/editNpcFlaw3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/flaw3Hint"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="@+id/editNpcDivider2"
-        app:layout_constraintHorizontal_bias="0.514"
-        app:layout_constraintStart_toStartOf="@+id/editNpcDivider2"
-        app:layout_constraintTop_toBottomOf="@+id/editNpcFlaw2" />
-
-    <Button
-        android:id="@+id/editNpcSubmit"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:text="@string/submit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/name"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toStartOf="@+id/editNpcCancelButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editNpcFlaw3"
-        tools:ignore="TextContrastCheck" />
+        app:layout_constraintTop_toTopOf="@+id/editNpcCancelButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

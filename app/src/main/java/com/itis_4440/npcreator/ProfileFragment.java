@@ -23,8 +23,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
-
-    // TODO: FILL OUT PROFILE FRAGMENT
     private static final String A = "Arrived at";
     private static final String E = "Error";
     private static final String ARG_CREATOR_ID = "creator_id";

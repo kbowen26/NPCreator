@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Description implements Serializable, Comparable<Description> {
-    String name, childhood, deity, occupation, monsterName
+    private String name, childhood, deity, occupation, monsterName
             , flaws, strengths, notes;
 
     public Description() {

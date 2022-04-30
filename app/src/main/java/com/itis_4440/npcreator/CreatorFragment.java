@@ -101,6 +101,20 @@ public class CreatorFragment extends Fragment implements View.OnClickListener {
             case R.id.whoAreTheyButton:
                 Npc npc = new Npc();
                 npc.setIndex(index);
+
+                String[] typeArray = index.split("-");
+                String type = "";
+
+                for (int i = 0; i < typeArray.length; i++) {
+                    if (i == 0) {
+                        type = typeArray[i];
+                    } else {
+                        type += " " + typeArray[i];
+                    }
+                }
+                Log.d(A, "name: " + type + ", should be: " + index);
+                npc.setType(type);
+
                 npc.setCreator(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
                 npc.setCreator_id(FirebaseAuth.getInstance().getUid());
                 creatorListener.description(npc);

@@ -23,9 +23,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class EditFragment extends Fragment implements View.OnClickListener {
+public class EditProfileFragment extends Fragment implements View.OnClickListener {
 
-    // TODO: FILL OUT EDIT FRAGMENT
     private static final String A = "Arrived at";
     private static final String E = "Error";
     private static final String ARG_NAME = "name";
@@ -34,7 +33,7 @@ public class EditFragment extends Fragment implements View.OnClickListener {
     private EditText name;
     private EditListener editListener;
 
-    public EditFragment() {
+    public EditProfileFragment() {
         // Required empty public constructor
     }
 
@@ -47,7 +46,7 @@ public class EditFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_edit, container, false);
+        View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
 
         name = view.findViewById(R.id.editProfileNameEditText);
         String currentName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();

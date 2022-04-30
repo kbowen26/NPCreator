@@ -54,18 +54,20 @@ public class NpcAdapter extends RecyclerView.Adapter<NpcAdapter.NpcViewHolder> {
 
         holder.name.setText(npc.getName());
         holder.type.setText(npc.getType());
-        holder.creator.setText(npc.getCreator());
 
         try {
             if (npc.getCreator_id().matches(FirebaseAuth.getInstance().getUid())) {
+                holder.creator.setVisibility(View.INVISIBLE);
                 holder.delete.setVisibility(View.VISIBLE);
                 holder.delete.setEnabled(true);
             } else {
+                holder.creator.setText(npc.getCreator());
                 holder.delete.setVisibility(View.INVISIBLE);
                 holder.delete.setEnabled(false);
             }
         } catch (Exception e) {
             Log.d(E, "no user ids to compare: " + e.getMessage());
+            holder.creator.setText(npc.getCreator());
             holder.delete.setVisibility(View.INVISIBLE);
             holder.delete.setEnabled(false);
         }
@@ -100,23 +102,23 @@ public class NpcAdapter extends RecyclerView.Adapter<NpcAdapter.NpcViewHolder> {
             delete.setOnClickListener(view -> {
                 Log.d(A, "deleteButton onClickListener");
                 npcListener = (NpcListener) npcContext;
-                String npcToDelete = npcs.get(position).getId();
-                Log.d(A, npcToDelete);
-                npcListener.delete(npcToDelete);
+                Npc npcToDelete = npcs.get(position);
+                Log.d(A, "npc to delete: " + npcToDelete.getName());
+                npcListener.deleteNpc(npcToDelete);
             });
 
             itemView.setOnClickListener(view -> {
                 if (view.getId() != delete.getId()) {
-                    String npcId = npcs.get(position).getId();
-                    Log.d(A, "select NPC: " + npcId);
-                    npcListener.select(npcId);
+                    Npc npc = npcs.get(position);
+                    Log.d(A, "select NPC: " + npc.getName());
+                    npcListener.selectNpc(npc);
                 }
             });
         }
 
         interface NpcListener {
-            void delete(String npcId);
-            void select(String npcId);
+            void deleteNpc(Npc npc);
+            void selectNpc(Npc npc);
         }
     }
 }

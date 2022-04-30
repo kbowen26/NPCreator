@@ -7,585 +7,626 @@
     android:layout_height="match_parent"
     tools:context=".NpcStatsFragment">
 
-        <TextView
-            android:id="@+id/detailsName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:fontFamily="serif"
-            android:text="@string/name"
-            android:textColor="?attr/colorPrimaryVariant"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_conversion_absoluteHeight="116dp"
-            tools:layout_conversion_absoluteWidth="0dp" />
-
-        <TextView
-            android:id="@+id/detailsSize"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/size"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textStyle="italic"
-            app:layout_constraintStart_toStartOf="@+id/detailsName"
-            app:layout_constraintTop_toBottomOf="@+id/detailsName"
-            tools:layout_conversion_absoluteHeight="69dp"
-            tools:layout_conversion_absoluteWidth="0dp" />
-
-        <TextView
-            android:id="@+id/detailsType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="@string/type"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textStyle="italic"
-            app:layout_constraintBottom_toBottomOf="@+id/detailsSize"
-            app:layout_constraintStart_toEndOf="@+id/detailsSize"
-            app:layout_constraintTop_toTopOf="@+id/detailsSize"
-            app:layout_constraintVertical_bias="0.0"
-            tools:layout_conversion_absoluteHeight="69dp"
-            tools:layout_conversion_absoluteWidth="0dp" />
-
-        <TextView
-            android:id="@+id/detailsAlignment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="@string/alignment"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textStyle="italic"
-            app:layout_constraintBottom_toBottomOf="@+id/detailsType"
-            app:layout_constraintStart_toEndOf="@+id/detailsType"
-            app:layout_constraintTop_toTopOf="@+id/detailsType"
-            app:layout_constraintVertical_bias="0.0"
-            tools:layout_conversion_absoluteHeight="150dp"
-            tools:layout_conversion_absoluteWidth="0dp" />
-
-        <View
-            android:id="@+id/detailsDivider"
-            android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            android:layout_marginTop="8dp"
-            android:background="@mipmap/ic_npc_logo_black_background"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detailsType"
-            tools:layout_conversion_absoluteHeight="1dp"
-            tools:layout_conversion_absoluteWidth="0dp" />
-
-        <TextView
-            android:id="@+id/detailsAC"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/ac"
-            android:textColor="?attr/colorPrimaryVariant"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/detailsDivider"
-            tools:layout_conversion_absoluteHeight="183dp"
-            tools:layout_conversion_absoluteWidth="0dp" />
-
-        <TextView
-            android:id="@+id/detailsHP"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="@string/hp"
-            android:textColor="?attr/colorPrimaryVariant"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/detailsAC"
-            app:layout_constraintTop_toBottomOf="@+id/detailsAC"
-            tools:layout_conversion_absoluteHeight="167dp"
-            tools:layout_conversion_absoluteWidth="0dp" />
-
-        <TextView
-            android:id="@+id/detailsSpeed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="@string/speed"
-            android:textColor="?attr/colorPrimaryVariant"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/detailsHP"
-            app:layout_constraintTop_toBottomOf="@+id/detailsHP"
-            tools:layout_conversion_absoluteHeight="85dp"
-            tools:layout_conversion_absoluteWidth="0dp" />
-
-        <TextView
-            android:id="@+id/detailsACInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="@string/ac"
-            android:textColor="?attr/colorPrimaryVariant"
-            app:layout_constraintBottom_toBottomOf="@+id/detailsAC"
-            app:layout_constraintStart_toEndOf="@+id/detailsAC"
-            app:layout_constraintTop_toTopOf="@+id/detailsAC"
-            app:layout_constraintVertical_bias="0.0"
-            tools:layout_conversion_absoluteHeight="183dp"
-            tools:layout_conversion_absoluteWidth="0dp" />
-
-        <TextView
-            android:id="@+id/detailsHPInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="@string/hp"
-            android:textColor="?attr/colorPrimaryVariant"
-            app:layout_constraintBottom_toBottomOf="@+id/detailsHP"
-            app:layout_constraintStart_toEndOf="@+id/detailsHP"
-            app:layout_constraintTop_toTopOf="@+id/detailsHP"
-            tools:layout_conversion_absoluteHeight="167dp"
-            tools:layout_conversion_absoluteWidth="0dp" />
-
-        <TextView
-            android:id="@+id/detailsSpeedInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="@string/speed"
-            android:textColor="?attr/colorPrimaryVariant"
-            app:layout_constraintBottom_toBottomOf="@+id/detailsSpeed"
-            app:layout_constraintStart_toEndOf="@+id/detailsSpeed"
-            app:layout_constraintTop_toTopOf="@+id/detailsSpeed"
-            tools:layout_conversion_absoluteHeight="85dp"
-            tools:layout_conversion_absoluteWidth="0dp" />
-
-    <View
-        android:id="@+id/detailsDivider2"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@mipmap/ic_npc_logo_black_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailsSpeed"
-        tools:layout_conversion_absoluteHeight="1dp"
-        tools:layout_conversion_absoluteWidth="0dp" />
-
-
-    <LinearLayout
-        android:id="@+id/scoreHeaderLinLayout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailsDivider2">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/detailsSTR"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/str"
-            android:textAlignment="center"
-            android:textColor="?attr/colorPrimaryVariant"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            tools:layout_conversion_absoluteHeight="59dp"
-            tools:layout_conversion_absoluteWidth="0dp" />
-
-        <TextView
-            android:id="@+id/detailsDEX"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/dex"
-            android:textAlignment="center"
-            android:textColor="?attr/colorPrimaryVariant"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            tools:layout_conversion_absoluteHeight="59dp"
-            tools:layout_conversion_absoluteWidth="0dp" />
-
-        <TextView
-            android:id="@+id/detailsCON"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/con"
-            android:textAlignment="center"
-            android:textColor="?attr/colorPrimaryVariant"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            tools:layout_conversion_absoluteHeight="59dp"
-            tools:layout_conversion_absoluteWidth="0dp" />
-
-        <TextView
-            android:id="@+id/detailsINT"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/intel"
-            android:textAlignment="center"
-            android:textColor="?attr/colorPrimaryVariant"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            tools:layout_conversion_absoluteHeight="59dp"
-            tools:layout_conversion_absoluteWidth="0dp" />
-
-        <TextView
-            android:id="@+id/detailsWIS"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/wis"
-            android:textAlignment="center"
-            android:textColor="?attr/colorPrimaryVariant"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            tools:layout_conversion_absoluteHeight="59dp"
-            tools:layout_conversion_absoluteWidth="0dp" />
-
-        <TextView
-            android:id="@+id/detailsCHA"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/cha"
-            android:textAlignment="center"
-            android:textColor="?attr/colorPrimaryVariant"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            tools:layout_conversion_absoluteHeight="59dp"
-            tools:layout_conversion_absoluteWidth="0dp" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/scoreLinLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scoreHeaderLinLayout">
-
-        <TextView
-            android:id="@+id/detailsCHA2"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/placeholderNum"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="16sp"
-            tools:layout_conversion_absoluteHeight="22dp"
-            tools:layout_conversion_absoluteWidth="0dp" />
+            android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/detailsINT2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/placeholderNum"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="16sp"
-            tools:layout_conversion_absoluteHeight="22dp"
-            tools:layout_conversion_absoluteWidth="0dp" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/statsScrollConstraint"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/detailsWIS2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/placeholderNum"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="16sp"
-            tools:layout_conversion_absoluteHeight="22dp"
-            tools:layout_conversion_absoluteWidth="0dp" />
+                <TextView
+                    android:id="@+id/detailsChallenge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/cr"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailsLangsInfo"
+                    tools:layout_conversion_absoluteHeight="265dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
 
-        <TextView
-            android:id="@+id/detailsSTR2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/placeholderNum"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="16sp"
-            tools:layout_conversion_absoluteHeight="22dp"
-            tools:layout_conversion_absoluteWidth="0dp" />
+                <TextView
+                    android:id="@+id/detailsSkillsInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:text="@string/skills"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/detailsSkills"
+                    app:layout_constraintTop_toTopOf="@+id/detailsSkills"
+                    tools:layout_conversion_absoluteHeight="101dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
 
-        <TextView
-            android:id="@+id/detailsDEX2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/placeholderNum"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="16sp"
-            tools:layout_conversion_absoluteHeight="22dp"
-            tools:layout_conversion_absoluteWidth="0dp" />
+                <View
+                    android:id="@+id/detailsDivider5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="4dp"
+                    android:background="@mipmap/ic_npc_logo_black_background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailsAbilitiesRecyclerView"
+                    tools:layout_conversion_absoluteHeight="1dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
 
-        <TextView
-            android:id="@+id/detailsCON2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/placeholderNum"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="16sp"
-            tools:layout_conversion_absoluteHeight="22dp"
-            tools:layout_conversion_absoluteWidth="0dp" />
+                <TextView
+                    android:id="@+id/detailsChallengeInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:text="@string/cr"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/detailsChallenge"
+                    app:layout_constraintTop_toTopOf="@+id/detailsChallenge"
+                    tools:layout_conversion_absoluteHeight="265dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/detailsHP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/hp"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/detailsAC"
+                    app:layout_constraintTop_toBottomOf="@+id/detailsACInfo"
+                    tools:layout_conversion_absoluteHeight="167dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
 
-    <View
-        android:id="@+id/detailsDivider3"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:layout_marginTop="8dp"
-        android:background="@mipmap/ic_npc_logo_black_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scoreLinLayout"
-        app:layout_marginBaseline="8dp"
-        tools:layout_conversion_absoluteHeight="1dp"
-        tools:layout_conversion_absoluteWidth="0dp" />
+                <TextView
+                    android:id="@+id/detailsName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:fontFamily="serif"
+                    android:text="@string/name"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_conversion_absoluteHeight="116dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
 
-    <TextView
-        android:id="@+id/detailsSaving"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/savingThrows"
-        android:textColor="?attr/colorPrimaryVariant"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailsDivider3"
-        tools:layout_conversion_absoluteHeight="216dp"
-        tools:layout_conversion_absoluteWidth="0dp" />
+                <TextView
+                    android:id="@+id/detailsSaving"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/savingThrows"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailsDivider3"
+                    tools:layout_conversion_absoluteHeight="216dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
 
-    <TextView
-        android:id="@+id/detailsSavingInfo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="@string/savingThrows"
-        android:textColor="?attr/colorPrimaryVariant"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/detailsSaving"
-        app:layout_constraintTop_toTopOf="@+id/detailsSaving"
-        tools:layout_conversion_absoluteHeight="216dp"
-        tools:layout_conversion_absoluteWidth="0dp" />
+                <TextView
+                    android:id="@+id/detailsACInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:text="@string/ac"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/detailsAC"
+                    app:layout_constraintTop_toTopOf="@+id/detailsAC"
+                    tools:layout_conversion_absoluteHeight="183dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
 
-    <TextView
-        android:id="@+id/detailsSkills"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="@string/skills"
-        android:textColor="?attr/colorPrimaryVariant"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/detailsSaving"
-        app:layout_constraintTop_toBottomOf="@+id/detailsSavingInfo"
-        tools:layout_conversion_absoluteHeight="101dp"
-        tools:layout_conversion_absoluteWidth="0dp" />
+                <LinearLayout
+                    android:id="@+id/scoreHeaderLinLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailsDivider2">
 
-    <TextView
-        android:id="@+id/detailsSkillsInfo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="@string/skills"
-        android:textColor="?attr/colorPrimaryVariant"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/detailsSkills"
-        app:layout_constraintTop_toTopOf="@+id/detailsSkills"
-        tools:layout_conversion_absoluteHeight="101dp"
-        tools:layout_conversion_absoluteWidth="0dp" />
+                    <TextView
+                        android:id="@+id/detailsSTR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/str"
+                        android:textAlignment="center"
+                        android:textColor="?attr/colorPrimaryVariant"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:layout_conversion_absoluteHeight="59dp"
+                        tools:layout_conversion_absoluteWidth="0dp" />
 
-    <TextView
-        android:id="@+id/detailsSensesInfo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="@string/senses"
-        android:textColor="?attr/colorPrimaryVariant"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/detailsSenses"
-        app:layout_constraintTop_toTopOf="@+id/detailsSenses"
-        tools:layout_conversion_absoluteHeight="101dp"
-        tools:layout_conversion_absoluteWidth="0dp" />
+                    <TextView
+                        android:id="@+id/detailsDEX"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/dex"
+                        android:textAlignment="center"
+                        android:textColor="?attr/colorPrimaryVariant"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:layout_conversion_absoluteHeight="59dp"
+                        tools:layout_conversion_absoluteWidth="0dp" />
 
-    <TextView
-        android:id="@+id/detailsLangsInfo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="@string/langs"
-        android:textColor="?attr/colorPrimaryVariant"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/detailsLangs"
-        app:layout_constraintTop_toTopOf="@+id/detailsLangs"
-        tools:layout_conversion_absoluteHeight="150dp"
-        tools:layout_conversion_absoluteWidth="0dp" />
+                    <TextView
+                        android:id="@+id/detailsCON"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/con"
+                        android:textAlignment="center"
+                        android:textColor="?attr/colorPrimaryVariant"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:layout_conversion_absoluteHeight="59dp"
+                        tools:layout_conversion_absoluteWidth="0dp" />
 
-    <TextView
-        android:id="@+id/detailsSenses"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="@string/senses"
-        android:textColor="?attr/colorPrimaryVariant"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/detailsSkills"
-        app:layout_constraintTop_toBottomOf="@+id/detailsSkillsInfo"
-        tools:layout_conversion_absoluteHeight="101dp"
-        tools:layout_conversion_absoluteWidth="0dp" />
+                    <TextView
+                        android:id="@+id/detailsINT"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/intel"
+                        android:textAlignment="center"
+                        android:textColor="?attr/colorPrimaryVariant"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:layout_conversion_absoluteHeight="59dp"
+                        tools:layout_conversion_absoluteWidth="0dp" />
 
-    <TextView
-        android:id="@+id/detailsChallenge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/cr"
-        android:textColor="?attr/colorPrimaryVariant"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/detailsLangs"
-        app:layout_constraintTop_toBottomOf="@+id/detailsLangsInfo"
-        tools:layout_conversion_absoluteHeight="265dp"
-        tools:layout_conversion_absoluteWidth="0dp" />
+                    <TextView
+                        android:id="@+id/detailsWIS"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/wis"
+                        android:textAlignment="center"
+                        android:textColor="?attr/colorPrimaryVariant"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:layout_conversion_absoluteHeight="59dp"
+                        tools:layout_conversion_absoluteWidth="0dp" />
 
-    <TextView
-        android:id="@+id/detailsChallengeInfo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="@string/cr"
-        android:textColor="?attr/colorPrimaryVariant"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/detailsChallenge"
-        app:layout_constraintTop_toTopOf="@+id/detailsChallenge"
-        tools:layout_conversion_absoluteHeight="265dp"
-        tools:layout_conversion_absoluteWidth="0dp" />
+                    <TextView
+                        android:id="@+id/detailsCHA"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/cha"
+                        android:textAlignment="center"
+                        android:textColor="?attr/colorPrimaryVariant"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:layout_conversion_absoluteHeight="59dp"
+                        tools:layout_conversion_absoluteWidth="0dp" />
 
-    <TextView
-        android:id="@+id/detailsLangs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="@string/langs"
-        android:textColor="?attr/colorPrimaryVariant"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/detailsSenses"
-        app:layout_constraintTop_toBottomOf="@+id/detailsSensesInfo"
-        tools:layout_conversion_absoluteHeight="150dp"
-        tools:layout_conversion_absoluteWidth="0dp" />
+                </LinearLayout>
 
-    <View
-        android:id="@+id/detailsDivider4"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:layout_marginTop="8dp"
-        android:background="@mipmap/ic_npc_logo_black_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailsChallengeInfo"
-        tools:layout_conversion_absoluteHeight="1dp"
-        tools:layout_conversion_absoluteWidth="0dp" />
+                <LinearLayout
+                    android:id="@+id/scoreLinLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/scoreHeaderLinLayout">
 
-    <TextView
-        android:id="@+id/detailsAbilities"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="serif"
-        android:text="@string/Abilities"
-        android:textColor="?attr/colorPrimaryVariant"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailsDivider4"
-        tools:layout_conversion_absoluteHeight="216dp"
-        tools:layout_conversion_absoluteWidth="0dp" />
+                    <TextView
+                        android:id="@+id/detailsCHA2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/placeholderNum"
+                        android:textAlignment="center"
+                        android:textAllCaps="true"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="16sp"
+                        tools:layout_conversion_absoluteHeight="22dp"
+                        tools:layout_conversion_absoluteWidth="0dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/detailsAbilitiesRecyclerView"
-        android:layout_width="0dp"
-        android:layout_height="140dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailsAbilities"
-        tools:layout_conversion_absoluteHeight="1013dp"
-        tools:layout_conversion_absoluteWidth="0dp">
+                    <TextView
+                        android:id="@+id/detailsINT2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/placeholderNum"
+                        android:textAlignment="center"
+                        android:textAllCaps="true"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="16sp"
+                        tools:layout_conversion_absoluteHeight="22dp"
+                        tools:layout_conversion_absoluteWidth="0dp" />
 
-    </androidx.recyclerview.widget.RecyclerView>
+                    <TextView
+                        android:id="@+id/detailsWIS2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/placeholderNum"
+                        android:textAlignment="center"
+                        android:textAllCaps="true"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="16sp"
+                        tools:layout_conversion_absoluteHeight="22dp"
+                        tools:layout_conversion_absoluteWidth="0dp" />
 
-    <View
-        android:id="@+id/detailsDivider5"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:layout_marginTop="8dp"
-        android:background="@mipmap/ic_npc_logo_black_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailsAbilitiesRecyclerView"
-        tools:layout_conversion_absoluteHeight="1dp"
-        tools:layout_conversion_absoluteWidth="0dp" />
+                    <TextView
+                        android:id="@+id/detailsSTR2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/placeholderNum"
+                        android:textAlignment="center"
+                        android:textAllCaps="true"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="16sp"
+                        tools:layout_conversion_absoluteHeight="22dp"
+                        tools:layout_conversion_absoluteWidth="0dp" />
 
-    <TextView
-        android:id="@+id/detailsActions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="serif"
-        android:text="@string/actionsHeader"
-        android:textColor="?attr/colorPrimaryVariant"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/detailsAbilities"
-        app:layout_constraintTop_toBottomOf="@+id/detailsDivider5"
-        tools:layout_conversion_absoluteHeight="169dp"
-        tools:layout_conversion_absoluteWidth="0dp" />
+                    <TextView
+                        android:id="@+id/detailsDEX2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/placeholderNum"
+                        android:textAlignment="center"
+                        android:textAllCaps="true"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="16sp"
+                        tools:layout_conversion_absoluteHeight="22dp"
+                        tools:layout_conversion_absoluteWidth="0dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/detailsActionsRecyclerView"
-        android:layout_width="0dp"
-        android:layout_height="150dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailsActions"
-        tools:layout_conversion_absoluteHeight="1013dp"
-        tools:layout_conversion_absoluteWidth="0dp">
+                    <TextView
+                        android:id="@+id/detailsCON2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/placeholderNum"
+                        android:textAlignment="center"
+                        android:textAllCaps="true"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="16sp"
+                        tools:layout_conversion_absoluteHeight="22dp"
+                        tools:layout_conversion_absoluteWidth="0dp" />
 
-    </androidx.recyclerview.widget.RecyclerView>
+                </LinearLayout>
 
-    <View
-        android:id="@+id/detailsDivider6"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:background="@mipmap/ic_npc_logo_black_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_conversion_absoluteHeight="1dp"
-        tools:layout_conversion_absoluteWidth="0dp" />
+                <TextView
+                    android:id="@+id/detailsLangs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/langs"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailsSensesInfo"
+                    tools:layout_conversion_absoluteHeight="150dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
+
+                <View
+                    android:id="@+id/detailsDivider2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="4dp"
+                    android:background="@mipmap/ic_npc_logo_black_background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailsSpeedInfo"
+                    tools:layout_conversion_absoluteHeight="1dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
+
+                <View
+                    android:id="@+id/detailsDivider4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="4dp"
+                    android:background="@mipmap/ic_npc_logo_black_background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailsChallengeInfo"
+                    tools:layout_conversion_absoluteHeight="1dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
+
+                <TextView
+                    android:id="@+id/detailsSpeed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/speed"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/detailsHP"
+                    app:layout_constraintTop_toBottomOf="@+id/detailsHPInfo"
+                    tools:layout_conversion_absoluteHeight="85dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
+
+                <TextView
+                    android:id="@+id/detailsLangsInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:text="@string/langs"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/detailsLangs"
+                    app:layout_constraintTop_toTopOf="@+id/detailsLangs"
+                    tools:layout_conversion_absoluteHeight="150dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/detailsAbilitiesRecyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="140dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailsAbilities"
+                    tools:layout_conversion_absoluteHeight="1013dp"
+                    tools:layout_conversion_absoluteWidth="0dp">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/detailsActionsRecyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailsActions"
+                    tools:layout_conversion_absoluteHeight="1013dp"
+                    tools:layout_conversion_absoluteWidth="0dp">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <TextView
+                    android:id="@+id/detailsHPInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:text="@string/hp"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/detailsHP"
+                    app:layout_constraintTop_toTopOf="@+id/detailsHP"
+                    tools:layout_conversion_absoluteHeight="167dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
+
+                <TextView
+                    android:id="@+id/detailsActions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="serif"
+                    android:text="@string/actionsHeader"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailsDivider5"
+                    tools:layout_conversion_absoluteHeight="169dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
+
+                <TextView
+                    android:id="@+id/detailsType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/type"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textStyle="italic"
+                    app:layout_constraintBottom_toBottomOf="@+id/detailsSize"
+                    app:layout_constraintStart_toEndOf="@+id/detailsSize"
+                    app:layout_constraintTop_toTopOf="@+id/detailsSize"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:layout_conversion_absoluteHeight="69dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
+
+                <TextView
+                    android:id="@+id/detailsAlignment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="@string/alignment"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textStyle="italic"
+                    app:layout_constraintBottom_toBottomOf="@+id/detailsType"
+                    app:layout_constraintStart_toEndOf="@+id/detailsType"
+                    app:layout_constraintTop_toTopOf="@+id/detailsType"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:layout_conversion_absoluteHeight="150dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
+
+                <TextView
+                    android:id="@+id/detailsSpeedInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:text="@string/speed"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/detailsSpeed"
+                    app:layout_constraintTop_toTopOf="@+id/detailsSpeed"
+                    tools:layout_conversion_absoluteHeight="85dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
+
+                <View
+                    android:id="@+id/detailsDivider"
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:background="@mipmap/ic_npc_logo_black_background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/detailsName"
+                    app:layout_constraintTop_toBottomOf="@+id/detailsAlignment"
+                    tools:layout_conversion_absoluteHeight="1dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
+
+                <TextView
+                    android:id="@+id/detailsSenses"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/senses"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailsSkillsInfo"
+                    tools:layout_conversion_absoluteHeight="101dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
+
+                <TextView
+                    android:id="@+id/detailsSavingInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:text="@string/savingThrows"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/detailsSaving"
+                    app:layout_constraintTop_toTopOf="@+id/detailsSaving"
+                    tools:layout_conversion_absoluteHeight="216dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
+
+                <TextView
+                    android:id="@+id/detailsSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/size"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textStyle="italic"
+                    app:layout_constraintStart_toStartOf="@+id/detailsName"
+                    app:layout_constraintTop_toBottomOf="@+id/detailsName"
+                    tools:layout_conversion_absoluteHeight="69dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
+
+                <TextView
+                    android:id="@+id/detailsAC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/ac"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/detailsSize"
+                    app:layout_constraintTop_toBottomOf="@+id/detailsDivider"
+                    tools:layout_conversion_absoluteHeight="183dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
+
+                <TextView
+                    android:id="@+id/detailsSkills"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/skills"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailsSavingInfo"
+                    tools:layout_conversion_absoluteHeight="101dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
+
+                <View
+                    android:id="@+id/detailsDivider6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:background="@mipmap/ic_npc_logo_black_background"
+                    tools:layout_conversion_absoluteHeight="1dp"
+                    tools:layout_conversion_absoluteWidth="0dp"
+                    tools:layout_editor_absoluteY="730dp" />
+
+                <View
+                    android:id="@+id/detailsDivider3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="4dp"
+                    android:background="@mipmap/ic_npc_logo_black_background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/scoreLinLayout"
+                    app:layout_marginBaseline="8dp"
+                    tools:layout_conversion_absoluteHeight="1dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
+
+                <TextView
+                    android:id="@+id/detailsSensesInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:text="@string/senses"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/detailsSenses"
+                    app:layout_constraintTop_toTopOf="@+id/detailsSenses"
+                    tools:layout_conversion_absoluteHeight="101dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
+
+                <TextView
+                    android:id="@+id/detailsAbilities"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="serif"
+                    android:text="@string/Abilities"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailsDivider4"
+                    tools:layout_conversion_absoluteHeight="216dp"
+                    tools:layout_conversion_absoluteWidth="0dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

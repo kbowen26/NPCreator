@@ -13,6 +13,8 @@
     <string name="profile">Profile</string>
     <string name="editProfile">Edit Profile</string>
     <string name="publicNpcs">NPCs</string>
+    <string name="publicNpc">\'s Npc</string>
+    <string name="yourNpc">Your NPC</string>
     <string name="profileNpcs">Your NPCs</string>
     <string name="whoAreThey">Who Are They?</string>
     <string name="stats">Stats</string>
@@ -51,14 +53,8 @@
     <string name="occupation">Occupation</string>
     <string name="strengths">Strengths:</string>
     <string name="strengthsHeader">Strengths</string>
-    <string name="strength1Hint">Strength 1</string>
-    <string name="strength2Hint">Strength 2</string>
-    <string name="strength3Hint">Strength 3</string>
     <string name="flaws">Flaws:</string>
     <string name="flawsHeader">Flaws</string>
-    <string name="flaw1Hint">Flaw 1</string>
-    <string name="flaw2Hint">Flaw 2</string>
-    <string name="flaw3Hint">Flaw 3</string>
     <string name="childhood">Childhood:</string>
     <string name="notes">Notes</string>
     <string name="publicSwitch">Post publicly?</string>
@@ -66,7 +62,17 @@
 
     <string name="emailHint">Email</string>
     <string name="passwordHint">Password</string>
-    <string name="nameHint">Name</string>
+    <string name="nameHint">Enter Name</string>
+    <string name="occupationHint">Enter Competency and Occupation</string>
+    <string name="deityHint">Enter Deity and Domain</string>
+    <string name="childhoodHint">Enter Circumstance and Childhood</string>
+    <string name="flaw1Hint">Enter Flaw 1</string>
+    <string name="flaw2Hint">Enter Flaw 2</string>
+    <string name="flaw3Hint">Enter Flaw 3</string>
+    <string name="strength1Hint">Enter Strength 1</string>
+    <string name="strength2Hint">Enter Strength 2</string>
+    <string name="strength3Hint">Enter Strength 3</string>
+    <string name="notesHint">Enter NPC Notes</string>
 
     <string name="accountCreated">Account created</string>
     <string name="nameUpdated">Name updated</string>
@@ -84,6 +90,4 @@
         under the bowl of the P.</string>
     <string name="editButtonDesc">Pencil</string>
     <string name="scrollViewDesc">NPC stats scroll view</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

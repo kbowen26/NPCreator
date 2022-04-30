@@ -5,7 +5,6 @@ import com.google.firebase.firestore.DocumentId;
 import java.io.Serializable;
 
 public class Npc implements Serializable, Comparable<Npc> {
-    @DocumentId
     private String id;
     private String name, type, index, creator, creator_id;
     private boolean publicNpc;

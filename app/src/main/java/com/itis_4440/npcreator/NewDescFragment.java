@@ -78,6 +78,7 @@ public class NewDescFragment extends Fragment implements View.OnClickListener {
             newDescListener.cancelDesc(npc.getIndex());
         } else if (view.getId() == R.id.newDescSubmit) {
             Log.d(A, "newDesc saveNpc");
+            npc.setPublicNpc(publicSwitch.isChecked());
             newDescListener.saveNpc(npc);
         }
     }

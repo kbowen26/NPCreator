@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 
 public class NpcDescFragment extends Fragment {
     //TODO FILL OUT DETAILS FRAG
@@ -21,7 +23,8 @@ public class NpcDescFragment extends Fragment {
 
     private Npc npc;
     private DetailsListener detailsListener;
-    private TextView name, occupation, strengths, flaws, deity, childhood, notes;
+    private TextView name, type, occupation, strengths
+            , flaws, deity, childhood, notes;
 
 
     public NpcDescFragment() {
@@ -51,6 +54,7 @@ public class NpcDescFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_npc_desc, container, false);
         Description desc = npc.getDescription();
         name = view.findViewById(R.id.descName);
+        type = view.findViewById(R.id.descMonsterType);
         occupation = view.findViewById(R.id.descOccupation);
         strengths = view.findViewById(R.id.descStrengths);
         flaws = view.findViewById(R.id.descFlaws);
@@ -60,6 +64,7 @@ public class NpcDescFragment extends Fragment {
 
         try {
             name.setText(desc.getName());
+            type.setText(desc.getMonsterName());
             occupation.setText(desc.getOccupation());
             strengths.setText(desc.getStrengths());
             flaws.setText(desc.getFlaws());
@@ -68,12 +73,21 @@ public class NpcDescFragment extends Fragment {
             notes.setText(desc.getNotes());
         } catch (Exception e) {
             Log.d(E, "description doesn't exist");
-
         }
 
-        view.findViewById(R.id.editButton).setOnClickListener(view1 -> {
-            detailsListener.editDesc(npc);
-        });
+        //only creator can edit
+        try {
+            if (npc.getCreator_id().matches(FirebaseAuth.getInstance().getUid())) {
+                Log.d(A, "user is creator");
+                view.findViewById(R.id.editButton).setOnClickListener(view1 -> {
+                    detailsListener.editDesc(npc);
+                });
+            }
+        } catch (Exception e) {
+            Log.d(A, "user not logged in: " + e.getMessage());
+            view.findViewById(R.id.editButton).setVisibility(View.GONE);
+            view.findViewById(R.id.editButton).setClickable(false);
+        }
         return view;
     }
 
