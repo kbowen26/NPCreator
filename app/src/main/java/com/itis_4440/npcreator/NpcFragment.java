@@ -13,6 +13,8 @@ import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
 public class NpcFragment extends Fragment {
 
     private static final String A = "Arrived at";
@@ -30,7 +32,6 @@ public class NpcFragment extends Fragment {
         NpcFragment fragment = new NpcFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_NPC, npc);
-        Log.d(A, "npc: " + npc.toString());
         fragment.setArguments(args);
         return fragment;
     }
@@ -49,27 +50,23 @@ public class NpcFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_npc, container, false);
         try {
-            if (npc.getCreator_id().matches(FirebaseAuth.getInstance().getUid())) {
-                getActivity().setTitle(R.string.yourNpc);
+            if (npc.getCreator_id().matches(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))) {
+                requireActivity().setTitle(R.string.yourNpc);
             } else {
                 String creatorTitle = npc.getCreator() + getResources().getString(R.string.publicNpc);
-                getActivity().setTitle(creatorTitle);
+                requireActivity().setTitle(creatorTitle);
             }
         } catch (Exception e) {
             Log.d(A, "user not logged in: " + e.getMessage());
             String creatorTitle = npc.getCreator() + getResources().getString(R.string.publicNpc);
-            getActivity().setTitle(creatorTitle);
+            requireActivity().setTitle(creatorTitle);
         }
         npcTabs = view.findViewById(R.id.npcTabLayout);
-
-        Log.d(A, "npcTabsList: " + npcTabs.getTabAt(0).getTag()
-                + ", " + npcTabs.getTabAt(1).getTag());
 
         getChildFragmentManager().beginTransaction()
                 .replace(R.id.npcFragmentContainerView, NpcStatsFragment.newInstance(npc.getIndex()))
                 .commit();
 
-        //TODO implement tabs
         npcTabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

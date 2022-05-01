@@ -14,17 +14,16 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
 
 public class NpcDescFragment extends Fragment {
-    //TODO FILL OUT DETAILS FRAG
     private static final String A = "Arrived at";
     private static final String E = "Error";
     private static final String ARG_INDEX = "index";
 
     private Npc npc;
     private DetailsListener detailsListener;
-    private TextView name, type, occupation, strengths
-            , flaws, deity, childhood, notes;
 
 
     public NpcDescFragment() {
@@ -53,14 +52,14 @@ public class NpcDescFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_npc_desc, container, false);
         Description desc = npc.getDescription();
-        name = view.findViewById(R.id.descName);
-        type = view.findViewById(R.id.descMonsterType);
-        occupation = view.findViewById(R.id.descOccupation);
-        strengths = view.findViewById(R.id.descStrengths);
-        flaws = view.findViewById(R.id.descFlaws);
-        deity = view.findViewById(R.id.descDeity);
-        childhood = view.findViewById(R.id.descChildhood);
-        notes = view.findViewById(R.id.descNotes);
+        TextView name = view.findViewById(R.id.descName);
+        TextView type = view.findViewById(R.id.descMonsterType);
+        TextView occupation = view.findViewById(R.id.descOccupation);
+        TextView strengths = view.findViewById(R.id.descStrengths);
+        TextView flaws = view.findViewById(R.id.descFlaws);
+        TextView deity = view.findViewById(R.id.descDeity);
+        TextView childhood = view.findViewById(R.id.descChildhood);
+        TextView notes = view.findViewById(R.id.descNotes);
 
         try {
             name.setText(desc.getName());
@@ -77,11 +76,9 @@ public class NpcDescFragment extends Fragment {
 
         //only creator can edit
         try {
-            if (npc.getCreator_id().matches(FirebaseAuth.getInstance().getUid())) {
+            if (npc.getCreator_id().matches(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))) {
                 Log.d(A, "user is creator");
-                view.findViewById(R.id.editButton).setOnClickListener(view1 -> {
-                    detailsListener.editDesc(npc);
-                });
+                view.findViewById(R.id.editButton).setOnClickListener(view1 -> detailsListener.editDesc(npc));
             }
         } catch (Exception e) {
             Log.d(A, "user not logged in: " + e.getMessage());

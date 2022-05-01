@@ -13,9 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -24,11 +21,10 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -38,14 +34,12 @@ import okhttp3.ResponseBody;
 public class NpcStatsFragment extends Fragment {
 
     private static final String A = "Arrived at";
-    private static final String E = "Error";
     private static final String ARG_INDEX = "index";
     private final OkHttpClient client = new OkHttpClient();
-    private FirebaseFirestore db;
     private String index;
-    private String[] speedTypes = {"walk", "fly", "swim", "climb", "burrow"};
-    private String[] skillTypes = {""};
-    private String[] senseTypes = {"blindsight", "darkvision", "tremorsense"
+    //This shouldn't be hardcoded
+    private final String[] speedTypes = {"walk", "fly", "swim", "climb", "burrow"};
+    private final String[] senseTypes = {"blindsight", "darkvision", "tremorsense"
             , "truesight", "passive_perception"};
 
     private TextView name, size, type, alignment, ac, hp, speed, str, dex,
@@ -55,7 +49,8 @@ public class NpcStatsFragment extends Fragment {
     private View abilitiesDivider;
     private AbilityAdapter abilityAdapter;
     private ActionAdapter actionAdapter;
-    private ArrayList<Feature> abilities = new ArrayList<>(), actions = new ArrayList<>();
+    private final ArrayList<Feature> abilities = new ArrayList<>();
+    private final ArrayList<Feature> actions = new ArrayList<>();
 
     public NpcStatsFragment() {
         // Required empty public constructor
@@ -82,8 +77,6 @@ public class NpcStatsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_npc_stats, container, false);
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
 
         //setup textview and buttons
         initialize(view);
@@ -109,8 +102,6 @@ public class NpcStatsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle(R.string.npcreator);
-
     }
 
     public void initialize(View view) {
@@ -166,7 +157,7 @@ public class NpcStatsFragment extends Fragment {
                     JSONObject json = null;
 
                     try {
-                        json = new JSONObject(response.body().string());
+                        json = new JSONObject(Objects.requireNonNull(response.body()).string());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -176,38 +167,39 @@ public class NpcStatsFragment extends Fragment {
                             try {
                                 name.setText(finalJson.getString("name"));
                                 size.setText(finalJson.getString("size"));
-                                type.setText(finalJson.getString("type") + ", ");
+                                String typeString = finalJson.getString("type") + ", ";
+                                type.setText(typeString);
                                 alignment.setText(finalJson.getString("alignment"));
                                 ac.setText(finalJson.getString("armor_class"));
-                                hp.setText(finalJson.getString("hit_points") + " (" + finalJson.getString("hit_dice") + ")");
+                                String hpString = finalJson.getString("hit_points") + " (" + finalJson.getString("hit_dice") + ")";
+                                hp.setText(hpString);
 
                                 //set speeds
                                 JSONObject speedObject = finalJson.getJSONObject("speed");
-                                String speedString = "";
+                                StringBuilder speedString = new StringBuilder();
                                 for (int i = 0; i < speedTypes.length; i++) {
-                                    Log.d(A, "speedTypes length: " + speedTypes.length);
                                     try {
                                         String getSpeed = speedObject.getString(speedTypes[i]);
                                         if (!getSpeed.isEmpty()) {
                                             if (speedTypes[i].matches("fly") && speedObject.getBoolean("hover")) {
-                                                if (speedString.matches("")) {
-                                                    speedString += speedTypes[i] + " " + getSpeed + " (hover)";
+                                                if (speedString.toString().matches("")) {
+                                                    speedString.append(speedTypes[i]).append(" ").append(getSpeed).append(" (hover)");
                                                 } else {
-                                                    speedString += ", " + speedTypes[i] + " " + getSpeed + " (hover)";
+                                                    speedString.append(", ").append(speedTypes[i]).append(" ").append(getSpeed).append(" (hover)");
                                                 }
                                             } else {
                                                 if (i == 0) {
-                                                    speedString += " " + getSpeed;
+                                                    speedString.append(" ").append(getSpeed);
                                                 } else {
-                                                    speedString += ", " + speedTypes[i] + " " + getSpeed;
+                                                    speedString.append(", ").append(speedTypes[i]).append(" ").append(getSpeed);
                                                 }
                                             }
                                         }
                                     } catch (Exception e) {
-                                        Log.d(E, e.getMessage());
+                                        //catching speedTypes a monster doesn't possess
                                     }
                                 }
-                                speed.setText(speedString);
+                                speed.setText(speedString.toString());
 
                                 //set ability scores
                                 str.setText(String.valueOf(finalJson.getInt("strength")));
@@ -217,33 +209,56 @@ public class NpcStatsFragment extends Fragment {
                                 wis.setText(String.valueOf(finalJson.getInt("wisdom")));
                                 cha.setText(String.valueOf(finalJson.getInt("charisma")));
 
-                                //TODO set proficiencies - saving throws
-                                //TODO set proficiencies - skills
+                                //get proficiencies, divide into saving throws and skills
+                                StringBuilder savingThrowsString = new StringBuilder();
+                                StringBuilder skillsString = new StringBuilder();
+                                JSONArray proficiencyArray = finalJson.getJSONArray("proficiencies");
+                                for (int i = 0; i < proficiencyArray.length(); i++) {
+                                    JSONObject jObject = proficiencyArray.getJSONObject(i);
+                                    Proficiency p = new Proficiency();
+                                    p.setValue(jObject.getInt("value"));
+                                    p.setName(jObject.getJSONObject("proficiency"));
+                                    if (p.getType().matches("skill")) {
+                                        if (skillsString.length() < 1) {
+                                            skillsString = new StringBuilder(p.toString());
+                                        } else {
+                                            skillsString.append(", ").append(p);
+                                        }
+                                    } else if (p.getType().matches("saving")) {
+                                        if (savingThrowsString.length() < 1) {
+                                            savingThrowsString = new StringBuilder(p.toString());
+                                        } else {
+                                            savingThrowsString.append(", ").append(p);
+                                        }
+                                    }
+                                }
+                                skills.setText(skillsString.toString());
+                                savingThrows.setText(savingThrowsString.toString());
 
                                 //set senses
                                 JSONObject senseObject = finalJson.getJSONObject("senses");
-                                String senseString = "";
-                                for (int i = 0; i < senseTypes.length; i++) {
+                                StringBuilder senseString = new StringBuilder();
+                                for (String senseType : senseTypes) {
                                     try {
-                                        String getSense = String.valueOf(senseObject.get(senseTypes[i]));
+                                        String getSense = String.valueOf(senseObject.get(senseType));
                                         if (!getSense.isEmpty()) {
-                                            if (senseString.matches("")) {
-                                                senseString += senseTypes[i] + " +" + getSense;
+                                            if (senseString.toString().matches("")) {
+                                                senseString.append(senseType).append(" +").append(getSense);
                                             } else {
-                                                senseString += ", " + senseTypes[i] + " " + getSense;
+                                                senseString.append(", ").append(senseType).append(" ").append(getSense);
                                             }
                                         }
                                     } catch (Exception e) {
-                                        Log.d(E, e.getMessage());
+                                        //catching senses monster doesn't have
                                     }
                                 }
-                                senses.setText(senseString);
+                                senses.setText(senseString.toString());
 
                                 // set languages
                                 langs.setText(finalJson.getString("languages"));
 
                                 //set Challenge Rating
-                                double crDouble = Double.valueOf(String.valueOf(finalJson.get("challenge_rating")));
+                                double crDouble = Double.parseDouble(String.valueOf(finalJson.get("challenge_rating")));
                                 int finalCr = (int) crDouble;
                                 String crString = String.valueOf(finalCr);
                                 if (1 > crDouble) {
@@ -282,8 +297,6 @@ public class NpcStatsFragment extends Fragment {
                                     headerActions.setVisibility(View.GONE);
                                     recyclerActions.setVisibility(View.GONE);
                                 }
-
-                                Log.d(A, actions.toString());
                                 actionAdapter.update(actions);
 
                             } catch (JSONException e) {
@@ -294,6 +307,7 @@ public class NpcStatsFragment extends Fragment {
                     }
                 } else {
                     ResponseBody responseBody = response.body();
+                    assert responseBody != null;
                     String body = responseBody.string();
                     Log.d(A, "getMonster onResponse NotSuccessful: " + body);
                 }

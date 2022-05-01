@@ -11,13 +11,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 public class NewDescFragment extends Fragment implements View.OnClickListener {
 
-    // TODO fill out NewDescFragment
     private static final String A = "Arrived at";
-    private static final String E = "Error";
     private static final String ARG_NPC = "npc";
 
     private Npc npc;

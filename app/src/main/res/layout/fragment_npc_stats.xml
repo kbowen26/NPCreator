@@ -450,7 +450,7 @@
                     android:id="@+id/detailsType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="4dp"
                     android:text="@string/type"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textStyle="italic"
@@ -570,15 +570,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/detailsSavingInfo"
                     tools:layout_conversion_absoluteHeight="101dp"
                     tools:layout_conversion_absoluteWidth="0dp" />
-
-                <View
-                    android:id="@+id/detailsDivider6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="1dp"
-                    android:background="@mipmap/ic_npc_logo_black_background"
-                    tools:layout_conversion_absoluteHeight="1dp"
-                    tools:layout_conversion_absoluteWidth="0dp"
-                    tools:layout_editor_absoluteY="730dp" />
 
                 <View
                     android:id="@+id/detailsDivider3"
